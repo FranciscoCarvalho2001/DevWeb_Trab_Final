@@ -4,7 +4,7 @@
     {
 
         public Clientes() {
-            ListaDipositivos = new HashSet<Clientes>();
+            ListaDipositivos = new HashSet<Dispositivos>();
         }
 
         /// <summary>
