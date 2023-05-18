@@ -37,11 +37,11 @@ namespace DevWeb_Trab_Final.Models
         //*************************************************
 
         [ForeignKey(nameof(Dispositivo))]
-        public string DispositivoFK { get; set; }
+        public int DispositivoFK { get; set; }
         public Dispositivos Dispositivo { get; set; }
 
         [ForeignKey(nameof(Funcionarios))]
-        public string FuncionariosFK { get; set; }
+        public int FuncionariosFK { get; set; }
         public Funcionarios Funcionarios { get; set; } 
 
 
