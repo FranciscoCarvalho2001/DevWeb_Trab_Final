@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DevWeb_Trab_Final.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DevWeb_Trab_FinalContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevWeb_Trab_FinalContext") ?? throw new InvalidOperationException("Connection string 'DevWeb_Trab_FinalContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
