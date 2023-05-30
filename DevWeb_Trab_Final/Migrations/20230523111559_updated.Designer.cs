@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230523111559_updated")]
+    partial class updated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,10 +38,6 @@ namespace DevWeb_Trab_Final.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<string>("Morada")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("NIF")
                         .HasColumnType("int");
 
@@ -51,14 +50,9 @@ namespace DevWeb_Trab_Final.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<string>("codPostal")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>
@@ -91,7 +85,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("ClienteFK");
 
-                    b.ToTable("Dispositivos", (string)null);
+                    b.ToTable("Dispositivos");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Funcionarios", b =>
@@ -120,7 +114,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("FuncionariosId");
 
-                    b.ToTable("Funcionarios", (string)null);
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Reparacao", b =>
@@ -160,7 +154,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("FuncionariosFK");
 
-                    b.ToTable("Reparacao", (string)null);
+                    b.ToTable("Reparacao");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>
