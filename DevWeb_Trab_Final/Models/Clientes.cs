@@ -23,6 +23,16 @@
         public int NIF { get; set; }
 
         /// <summary>
+        /// Morada do cliente
+        /// </summary>
+        public string Morada { get; set; }
+
+        /// <summary>
+        /// Código Postal do cliente
+        /// </summary>
+        public string CodPostal { get; set; }
+
+        /// <summary>
         /// Email do cliente
         /// </summary>
         public string Email { get; set; }
@@ -30,7 +40,7 @@
         /// <summary>
         /// Telemóvel do cliente
         /// </summary>
-        public int Telemovel { get; set; }
+        public string Telemovel { get; set; }
 
         //*************************************************
 

@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230531233549_correcao")]
+    partial class correcao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,15 +33,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CodPostal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Morada")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -49,9 +44,8 @@ namespace DevWeb_Trab_Final.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telemovel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Telemovel")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -99,19 +93,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CodPostal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Especializacao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Morada")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
