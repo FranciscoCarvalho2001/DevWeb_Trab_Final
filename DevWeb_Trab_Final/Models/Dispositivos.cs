@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevWeb_Trab_Final.Models
 {
@@ -33,13 +34,17 @@ namespace DevWeb_Trab_Final.Models
         /// </summary>
         public string Foto { get; set;}
 
+        /// <summary>
+        /// Descrição do estado do dispositivo
+        /// </summary>
+        public string Estado { get; set; }
         //*************************************************
 
         public ICollection<Reparacao> ListaReparacao { get; set; }
 
         [ForeignKey(nameof(Cliente))]
         public int ClienteFK { get; set; }
-        public Clientes Cliente { get; set; }
+        public Clientes? Cliente { get; set; }
 
     }
 }

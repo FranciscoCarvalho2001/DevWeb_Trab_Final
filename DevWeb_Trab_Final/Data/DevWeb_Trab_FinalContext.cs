@@ -15,5 +15,11 @@ namespace DevWeb_Trab_Final.Data
         }
 
         public DbSet<DevWeb_Trab_Final.Models.Clientes> Clientes { get; set; } = default!;
+
+        public DbSet<DevWeb_Trab_Final.Models.Funcionarios> Funcionarios { get; set; } = default!;
+
+        public DbSet<DevWeb_Trab_Final.Models.Dispositivos> Dispositivos { get; set; } = default!;
+
+        public DbSet<DevWeb_Trab_Final.Models.Reparacao> Reparacao { get; set; } = default!;
     }
 }

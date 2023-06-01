@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevWeb_Trab_Final.Models
 {
@@ -32,6 +33,7 @@ namespace DevWeb_Trab_Final.Models
         /// <summary>
         /// Observações relativas ao estado da reparação
         /// </summary>
+        
         public string Observacao { get; set; }
 
         //*************************************************
