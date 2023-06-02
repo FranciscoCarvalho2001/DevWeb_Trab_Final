@@ -59,16 +59,19 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Foto,DataInicio,DataFim,Custo,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
+        public async Task<IActionResult> Create([Bind("Id,Foto,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
         {
+            if (!string.IsNullOrEmpty(reparacao.CustoAux)) {
+                reparacao.Custo = Convert.ToDecimal(reparacao.CustoAux.Replace('.', ','));
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(reparacao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Id", reparacao.DispositivoFK);
-            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Id", reparacao.FuncionariosFK);
+            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Modelo", reparacao.DispositivoFK);
+            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Nome", reparacao.FuncionariosFK);
             return View(reparacao);
         }
 
@@ -95,7 +98,7 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Foto,DataInicio,DataFim,Custo,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Foto,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
         {
             if (id != reparacao.Id)
             {

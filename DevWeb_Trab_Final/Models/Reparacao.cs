@@ -25,7 +25,7 @@ namespace DevWeb_Trab_Final.Models
         /// <summary>
         /// Custo da reparação
         /// </summary>
-        public int Custo { get; set; }
+        public decimal Custo { get; set; }
 
         /// <summary>
         /// Atributo de auxílio à adição do 
