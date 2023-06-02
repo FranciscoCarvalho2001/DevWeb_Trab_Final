@@ -1,4 +1,4 @@
-﻿@model DevWeb_Trab_Final.Models.Clientes
+﻿@model DevWeb_Trab_Final.Models.Funcionarios
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Clientes</h4>
+    <h4>Funcionarios</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,21 +17,15 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NIF)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NIF)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Morada)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Morada)
         </dd>
-        <dt class="col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CodPostal)
         </dt>
-        <dd class="col-sm-10">
+        <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CodPostal)
         </dd>
         <dt class = "col-sm-2">
@@ -45,6 +39,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Telemovel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Especializacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Especializacao)
         </dd>
     </dl>
 </div>

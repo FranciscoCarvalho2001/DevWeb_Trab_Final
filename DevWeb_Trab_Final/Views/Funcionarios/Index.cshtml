@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DevWeb_Trab_Final.Models.Clientes>
+﻿@model IEnumerable<DevWeb_Trab_Final.Models.Funcionarios>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,9 +16,6 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NIF)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Morada)
             </th>
             <th>
@@ -30,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Telemovel)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especializacao)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,9 +38,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NIF)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Morada)
@@ -53,6 +50,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telemovel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especializacao)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

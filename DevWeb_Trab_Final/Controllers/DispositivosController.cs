@@ -10,87 +10,90 @@ using DevWeb_Trab_Final.Models;
 
 namespace DevWeb_Trab_Final.Controllers
 {
-    public class ClientesController : Controller
+    public class DispositivosController : Controller
     {
         private readonly DevWeb_Trab_FinalContext _context;
 
-        public ClientesController(DevWeb_Trab_FinalContext context)
+        public DispositivosController(DevWeb_Trab_FinalContext context)
         {
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Dispositivos
         public async Task<IActionResult> Index()
         {
-              return _context.Clientes != null ? 
-                          View(await _context.Clientes.ToListAsync()) :
-                          Problem("Entity set 'DevWeb_Trab_FinalContext.Clientes'  is null.");
+            var devWeb_Trab_FinalContext = _context.Dispositivos.Include(d => d.Cliente);
+            return View(await devWeb_Trab_FinalContext.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Dispositivos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Dispositivos == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var dispositivos = await _context.Dispositivos
+                .Include(d => d.Cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clientes == null)
+            if (dispositivos == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(dispositivos);
         }
 
-        // GET: Clientes/Create
+        // GET: Dispositivos/Create
         public IActionResult Create()
         {
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email");
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Dispositivos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,NIF,Morada,CodPostal,Email,Telemovel")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("Id,Tipo,DataReg,Modelo,Foto,Estado,ClienteFK")] Dispositivos dispositivos)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clientes);
+                _context.Add(dispositivos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
+            return View(dispositivos);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Dispositivos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Dispositivos == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes == null)
+            var dispositivos = await _context.Dispositivos.FindAsync(id);
+            if (dispositivos == null)
             {
                 return NotFound();
             }
-            return View(clientes);
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
+            return View(dispositivos);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Dispositivos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,NIF,Morada,CodPostal,Email,Telemovel")] Clientes clientes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Tipo,DataReg,Modelo,Foto,Estado,ClienteFK")] Dispositivos dispositivos)
         {
-            if (id != clientes.Id)
+            if (id != dispositivos.Id)
             {
                 return NotFound();
             }
@@ -99,12 +102,12 @@ namespace DevWeb_Trab_Final.Controllers
             {
                 try
                 {
-                    _context.Update(clientes);
+                    _context.Update(dispositivos);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientesExists(clientes.Id))
+                    if (!DispositivosExists(dispositivos.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +118,51 @@ namespace DevWeb_Trab_Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
+            return View(dispositivos);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Dispositivos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Dispositivos == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var dispositivos = await _context.Dispositivos
+                .Include(d => d.Cliente)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clientes == null)
+            if (dispositivos == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(dispositivos);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Dispositivos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Clientes == null)
+            if (_context.Dispositivos == null)
             {
-                return Problem("Entity set 'DevWeb_Trab_FinalContext.Clientes'  is null.");
+                return Problem("Entity set 'DevWeb_Trab_FinalContext.Dispositivos'  is null.");
             }
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes != null)
+            var dispositivos = await _context.Dispositivos.FindAsync(id);
+            if (dispositivos != null)
             {
-                _context.Clientes.Remove(clientes);
+                _context.Dispositivos.Remove(dispositivos);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientesExists(int id)
+        private bool DispositivosExists(int id)
         {
-          return (_context.Clientes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.Dispositivos.Any(e => e.Id == id);
         }
     }
 }

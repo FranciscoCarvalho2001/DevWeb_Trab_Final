@@ -10,87 +10,85 @@ using DevWeb_Trab_Final.Models;
 
 namespace DevWeb_Trab_Final.Controllers
 {
-    public class ClientesController : Controller
+    public class FuncionariosController : Controller
     {
         private readonly DevWeb_Trab_FinalContext _context;
 
-        public ClientesController(DevWeb_Trab_FinalContext context)
+        public FuncionariosController(DevWeb_Trab_FinalContext context)
         {
             _context = context;
         }
 
-        // GET: Clientes
+        // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-              return _context.Clientes != null ? 
-                          View(await _context.Clientes.ToListAsync()) :
-                          Problem("Entity set 'DevWeb_Trab_FinalContext.Clientes'  is null.");
+              return View(await _context.Funcionarios.ToListAsync());
         }
 
-        // GET: Clientes/Details/5
+        // GET: Funcionarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Funcionarios == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var funcionarios = await _context.Funcionarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clientes == null)
+            if (funcionarios == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(funcionarios);
         }
 
-        // GET: Clientes/Create
+        // GET: Funcionarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Clientes/Create
+        // POST: Funcionarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,NIF,Morada,CodPostal,Email,Telemovel")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Morada,CodPostal,Email,Telemovel,Especializacao")] Funcionarios funcionarios)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(clientes);
+                _context.Add(funcionarios);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            return View(funcionarios);
         }
 
-        // GET: Clientes/Edit/5
+        // GET: Funcionarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Funcionarios == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes == null)
+            var funcionarios = await _context.Funcionarios.FindAsync(id);
+            if (funcionarios == null)
             {
                 return NotFound();
             }
-            return View(clientes);
+            return View(funcionarios);
         }
 
-        // POST: Clientes/Edit/5
+        // POST: Funcionarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,NIF,Morada,CodPostal,Email,Telemovel")] Clientes clientes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Morada,CodPostal,Email,Telemovel,Especializacao")] Funcionarios funcionarios)
         {
-            if (id != clientes.Id)
+            if (id != funcionarios.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace DevWeb_Trab_Final.Controllers
             {
                 try
                 {
-                    _context.Update(clientes);
+                    _context.Update(funcionarios);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientesExists(clientes.Id))
+                    if (!FuncionariosExists(funcionarios.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +113,49 @@ namespace DevWeb_Trab_Final.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            return View(funcionarios);
         }
 
-        // GET: Clientes/Delete/5
+        // GET: Funcionarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Clientes == null)
+            if (id == null || _context.Funcionarios == null)
             {
                 return NotFound();
             }
 
-            var clientes = await _context.Clientes
+            var funcionarios = await _context.Funcionarios
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (clientes == null)
+            if (funcionarios == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            return View(funcionarios);
         }
 
-        // POST: Clientes/Delete/5
+        // POST: Funcionarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Clientes == null)
+            if (_context.Funcionarios == null)
             {
-                return Problem("Entity set 'DevWeb_Trab_FinalContext.Clientes'  is null.");
+                return Problem("Entity set 'DevWeb_Trab_FinalContext.Funcionarios'  is null.");
             }
-            var clientes = await _context.Clientes.FindAsync(id);
-            if (clientes != null)
+            var funcionarios = await _context.Funcionarios.FindAsync(id);
+            if (funcionarios != null)
             {
-                _context.Clientes.Remove(clientes);
+                _context.Funcionarios.Remove(funcionarios);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClientesExists(int id)
+        private bool FuncionariosExists(int id)
         {
-          return (_context.Clientes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _context.Funcionarios.Any(e => e.Id == id);
         }
     }
 }

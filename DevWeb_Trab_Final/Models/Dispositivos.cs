@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace DevWeb_Trab_Final.Models
 {
@@ -31,8 +32,12 @@ namespace DevWeb_Trab_Final.Models
         /// <summary>
         /// Foto do dispositivo
         /// </summary>
-        public string Foto { get; set;}
+        public string Foto { get; set; }
 
+        /// <summary>
+        /// Descrição do estado do dispositivo
+        /// </summary>
+        public string Estado { get; set; }
         //*************************************************
 
         public ICollection<Reparacao> ListaReparacao { get; set; }
