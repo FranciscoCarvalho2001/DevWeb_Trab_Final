@@ -8,6 +8,7 @@ namespace DevWeb_Trab_Final.Models
     {
         public Dispositivos() {
             ListaReparacao = new HashSet<Reparacao>();
+            ListaFotografias = new HashSet<Fotografias>();
         }
 
         /// <summary>
@@ -48,6 +49,7 @@ namespace DevWeb_Trab_Final.Models
         //*************************************************
 
         public ICollection<Reparacao> ListaReparacao { get; set; }
+        public ICollection<Fotografias> ListaFotografias { get; set; }
 
         [ForeignKey(nameof(Cliente))]
         [Display(Name = "Cliente")]

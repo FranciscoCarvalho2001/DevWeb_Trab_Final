@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230606182744_Fotografias")]
+    partial class Fotografias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +60,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>
@@ -93,7 +96,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("ClienteFK");
 
-                    b.ToTable("Dispositivos", (string)null);
+                    b.ToTable("Dispositivos");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Fotografias", b =>
@@ -114,7 +117,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("DispositivoFK");
 
-                    b.ToTable("Fotografias", (string)null);
+                    b.ToTable("Fotografias");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Funcionarios", b =>
@@ -153,7 +156,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Funcionarios", (string)null);
+                    b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Reparacao", b =>
@@ -192,7 +195,7 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.HasIndex("FuncionariosFK");
 
-                    b.ToTable("Reparacao", (string)null);
+                    b.ToTable("Reparacao");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>

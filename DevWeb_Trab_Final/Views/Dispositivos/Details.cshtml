@@ -47,6 +47,18 @@
             @Html.DisplayFor(model => model.Cliente.Email)
         </dd>
     </dl>
+
+    <h4>Fotografias do @Model.Modelo de @Model.Cliente.Nome</h4>
+
+    @foreach (var foto in Model.ListaFotografias) {
+        <p>
+            <img src="~/imagens/@foto.NomeFoto"
+                 alt="fotografia do @Model.Tipo"
+                 title="@Model.Tipo do modelo @Model.Modelo de @Model.Cliente"
+                 width="400px" />
+        </p>
+    }
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
