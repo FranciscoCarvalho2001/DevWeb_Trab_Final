@@ -59,7 +59,7 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Foto,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
+        public async Task<IActionResult> Create([Bind("Id,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
         {
             if (!string.IsNullOrEmpty(reparacao.CustoAux)) {
                 reparacao.Custo = Convert.ToDecimal(reparacao.CustoAux.Replace('.', ','));
@@ -98,7 +98,7 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Foto,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
         {
             if (id != reparacao.Id)
             {

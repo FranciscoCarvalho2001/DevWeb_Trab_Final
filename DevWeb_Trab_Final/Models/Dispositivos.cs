@@ -34,11 +34,6 @@ namespace DevWeb_Trab_Final.Models
         [Required(ErrorMessage = "A {0} é de preenchimento obrigatório")]
         public string Modelo { get; set; }
 
-        /// <summary>
-        /// Foto do dispositivo
-        /// </summary>
-        [Display(Name = "Imagem do Dispositivo")]
-        public string Foto { get; set; }
 
         /// <summary>
         /// Descrição do estado do dispositivo

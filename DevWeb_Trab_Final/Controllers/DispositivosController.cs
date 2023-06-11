@@ -64,7 +64,7 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Tipo,DataReg,Modelo,Foto,Estado,ClienteFK")] Dispositivos dispositivos, IFormFile imagemDispositivo) {
+        public async Task<IActionResult> Create([Bind("Id,Tipo,DataReg,Modelo,Estado,ClienteFK")] Dispositivos dispositivos, IFormFile imagemDispositivo) {
 
             // vars aux
             string nomeFoto = "";
@@ -161,7 +161,7 @@ namespace DevWeb_Trab_Final.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Tipo,DataReg,Modelo,Foto,Estado,ClienteFK")] Dispositivos dispositivos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Tipo,DataReg,Modelo,Estado,ClienteFK")] Dispositivos dispositivos)
         {
             if (id != dispositivos.Id)
             {

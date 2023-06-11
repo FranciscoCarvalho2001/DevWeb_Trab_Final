@@ -42,13 +42,6 @@ namespace DevWeb_Trab_Final.Models
         /// </summary>
         [StringLength(255)]
         public string Observacao { get; set; }
-
-        /// <summary>
-        /// Referência da foto da reparação
-        /// </summary>
-        [Display(Name = "Imagem do Dispositivo")]
-        public string Foto { get; set; }
-
         //*************************************************
 
         [ForeignKey(nameof(Dispositivo))]
