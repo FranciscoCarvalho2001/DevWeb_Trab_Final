@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230602182303_Mudança")]
+    partial class Mudança
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,6 +81,9 @@ namespace DevWeb_Trab_Final.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Foto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -91,27 +97,6 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasIndex("ClienteFK");
 
                     b.ToTable("Dispositivos");
-                });
-
-            modelBuilder.Entity("DevWeb_Trab_Final.Models.Fotografias", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DispositivoFK")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeFoto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DispositivoFK");
-
-                    b.ToTable("Fotografias");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Funcionarios", b =>
@@ -161,8 +146,8 @@ namespace DevWeb_Trab_Final.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Custo")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Custo")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DataFim")
                         .HasColumnType("datetime2");
@@ -172,6 +157,9 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.Property<int>("DispositivoFK")
                         .HasColumnType("int");
+
+                    b.Property<string>("Foto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FuncionariosFK")
                         .HasColumnType("int");
@@ -200,17 +188,6 @@ namespace DevWeb_Trab_Final.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("DevWeb_Trab_Final.Models.Fotografias", b =>
-                {
-                    b.HasOne("DevWeb_Trab_Final.Models.Dispositivos", "Dispositivo")
-                        .WithMany("ListaFotografias")
-                        .HasForeignKey("DispositivoFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dispositivo");
-                });
-
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Reparacao", b =>
                 {
                     b.HasOne("DevWeb_Trab_Final.Models.Dispositivos", "Dispositivo")
@@ -237,8 +214,6 @@ namespace DevWeb_Trab_Final.Migrations
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>
                 {
-                    b.Navigation("ListaFotografias");
-
                     b.Navigation("ListaReparacao");
                 });
 

@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230606182744_Fotografias")]
+    partial class Fotografias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,6 +79,9 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Modelo")
@@ -172,6 +178,9 @@ namespace DevWeb_Trab_Final.Migrations
 
                     b.Property<int>("DispositivoFK")
                         .HasColumnType("int");
+
+                    b.Property<string>("Foto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FuncionariosFK")
                         .HasColumnType("int");

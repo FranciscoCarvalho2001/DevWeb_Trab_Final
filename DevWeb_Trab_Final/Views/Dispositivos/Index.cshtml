@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DevWeb_Trab_Final.Models.Clientes>
+﻿@model IEnumerable<DevWeb_Trab_Final.Models.Dispositivos>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NIF)
+                @Html.DisplayNameFor(model => model.DataReg)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Morada)
+                @Html.DisplayNameFor(model => model.Modelo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodPostal)
+                @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telemovel)
+                @Html.DisplayNameFor(model => model.Cliente)
             </th>
             <th></th>
         </tr>
@@ -37,22 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.Tipo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NIF)
+                @Html.DisplayFor(modelItem => item.DataReg)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Morada)
+                @Html.DisplayFor(modelItem => item.Modelo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodPostal)
+                @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telemovel)
+                @Html.DisplayFor(modelItem => item.Cliente.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

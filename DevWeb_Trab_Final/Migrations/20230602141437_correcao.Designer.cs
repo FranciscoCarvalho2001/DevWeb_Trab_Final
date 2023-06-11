@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230602141437_correcao")]
+    partial class correcao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,8 +34,8 @@ namespace DevWeb_Trab_Final.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodPostal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -40,7 +43,6 @@ namespace DevWeb_Trab_Final.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Morada")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NIF")
@@ -75,15 +77,15 @@ namespace DevWeb_Trab_Final.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Estado")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Modelo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tipo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -91,27 +93,6 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasIndex("ClienteFK");
 
                     b.ToTable("Dispositivos");
-                });
-
-            modelBuilder.Entity("DevWeb_Trab_Final.Models.Fotografias", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DispositivoFK")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeFoto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DispositivoFK");
-
-                    b.ToTable("Fotografias");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Funcionarios", b =>
@@ -123,30 +104,22 @@ namespace DevWeb_Trab_Final.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CodPostal")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Especializacao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Morada")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telemovel")
-                        .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("nvarchar(9)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -161,10 +134,10 @@ namespace DevWeb_Trab_Final.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Custo")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Custo")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("DataFim")
+                    b.Property<DateTime>("DataFim")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInicio")
@@ -173,12 +146,14 @@ namespace DevWeb_Trab_Final.Migrations
                     b.Property<int>("DispositivoFK")
                         .HasColumnType("int");
 
+                    b.Property<string>("Foto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("FuncionariosFK")
                         .HasColumnType("int");
 
                     b.Property<string>("Observacao")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -198,17 +173,6 @@ namespace DevWeb_Trab_Final.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
-                });
-
-            modelBuilder.Entity("DevWeb_Trab_Final.Models.Fotografias", b =>
-                {
-                    b.HasOne("DevWeb_Trab_Final.Models.Dispositivos", "Dispositivo")
-                        .WithMany("ListaFotografias")
-                        .HasForeignKey("DispositivoFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Dispositivo");
                 });
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Reparacao", b =>
@@ -237,8 +201,6 @@ namespace DevWeb_Trab_Final.Migrations
 
             modelBuilder.Entity("DevWeb_Trab_Final.Models.Dispositivos", b =>
                 {
-                    b.Navigation("ListaFotografias");
-
                     b.Navigation("ListaReparacao");
                 });
 
