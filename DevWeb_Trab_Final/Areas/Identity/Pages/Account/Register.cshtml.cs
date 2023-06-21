@@ -10,6 +10,10 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+
+using DevWeb_Trab_Final.Data;
+using DevWeb_Trab_Final.Models;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +21,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
@@ -30,12 +35,15 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly DevWeb_Trab_FinalContext _context;
+
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            DevWeb_Trab_FinalContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +51,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -97,30 +106,73 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public Funcionarios Funcionario { get; set; }
+
+
         }
 
 
+        /// <summary>
+        /// método para reagir aos pedidos em GET
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        /// <summary>
+        /// método que é acionado quando se enviam dados em modo POST
+        /// é o que adiciona dados á DB
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            //      ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            // se os dados forem corretos
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                // efetiva criação do USER
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
+                // se há sucesso na criação do USER
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    // *******************************************
+                    // adicionar os dados do Funcionario á DB
+                    // *******************************************
+
+                    //atualizar os dados do objeto FUNCIONARIO
+                    Input.Funcionario.Email = Input.Email;
+                    Input.Funcionario.UserId = user.Id;
+
+                    //adiconar os dados á DB
+                    try {
+                        _context.Add(Input.Funcionario);
+                        await _context.SaveChangesAsync();
+                    } catch (Exception) {
+                        // não esquecer tratar exceção
+                        throw;
+                    }
+
+                    // *******************************************
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
