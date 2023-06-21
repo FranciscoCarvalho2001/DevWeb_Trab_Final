@@ -59,7 +59,13 @@ namespace DevWeb_Trab_Final.Models
         public string Telemovel { get; set; }
 
         //*************************************************
+        /// <summary>
+        /// atributo para efetuar a ligação entre a base 
+        /// de dados do 'negócio' e a base de dados da autenticação
+        /// </summary>
+        public string UserId { get; set; }
 
+        //*************************************************
         public ICollection<Dispositivos> ListaDipositivos { get; set; }
 
     }

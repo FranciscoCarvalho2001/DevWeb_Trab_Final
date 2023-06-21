@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using DevWeb_Trab_Final.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DevWeb_Trab_FinalContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DevWeb_Trab_FinalContext") ?? throw new InvalidOperationException("Connection string 'DevWeb_Trab_FinalContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DevWeb_Trab_FinalContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
