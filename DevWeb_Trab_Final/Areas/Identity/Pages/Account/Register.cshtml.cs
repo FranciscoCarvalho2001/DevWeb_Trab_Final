@@ -155,6 +155,8 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    await _userManager.AddToRoleAsync(user, "Funcionario");
+
                     // *******************************************
                     // adicionar os dados do Funcionario á DB
                     // *******************************************
