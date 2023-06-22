@@ -163,13 +163,14 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                     Input.Funcionario.Email = Input.Email;
                     Input.Funcionario.UserId = user.Id;
 
-                    //adiconar os dados á DB
                     try {
+                        //adiconar os dados á DB
                         _context.Add(Input.Funcionario);
                         await _context.SaveChangesAsync();
                     } catch (Exception) {
-                        // não esquecer tratar exceção
-                        throw;
+                        //remover os dados á DB
+                        _context.Remove(Input.Funcionario);
+                        await _context.SaveChangesAsync();
                     }
 
                     // *******************************************
