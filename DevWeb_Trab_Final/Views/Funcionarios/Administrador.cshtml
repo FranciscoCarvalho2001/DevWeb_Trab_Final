@@ -1,0 +1,207 @@
+﻿@using DevWeb_Trab_Final.ViewModels
+@model AdministradorView
+
+@{
+    ViewData["Title"] = "Administrador";
+}
+
+<section class="intro-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-8">
+                <div class="title-single-box">
+                    <h1 class="title-single">Administração</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+ <div class="accordion" id="accordionExample">
+
+
+    @if (User.IsInRole("Funcionario")){
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Funcionários</button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                        <a asp-action="Create">Create New</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().Nome)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().NIF)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().Morada)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().CodPostal)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().Telemovel)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Clientes)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Morada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CodPostal)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Telemovel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserId)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+}
+    @if (User.IsInRole("Funcionario"))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().DataInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().DataFim)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().Custo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().Observacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().Dispositivo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reparacao.First().Funcionarios)
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Reparacao)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataFim)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Custo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Observacao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dispositivo.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Funcionarios.Id)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (User.IsInRole("Funcionario"))
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dispositivos.First().Tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dispositivos.First().DataReg)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dispositivos.First().Modelo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dispositivos.First().Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dispositivos.First().Cliente)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Dispositivos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataReg)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Modelo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cliente.Email)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

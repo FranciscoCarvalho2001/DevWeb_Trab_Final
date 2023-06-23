@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DevWeb_Trab_Final.Data;
 using DevWeb_Trab_Final.Models;
+using DevWeb_Trab_Final.ViewModels;
 
 namespace DevWeb_Trab_Final.Controllers
 {
@@ -23,6 +24,18 @@ namespace DevWeb_Trab_Final.Controllers
         public async Task<IActionResult> Index()
         {
               return View(await _context.Funcionarios.ToListAsync());
+        }
+
+        public async Task<IActionResult> Administration()
+        {
+            var model = new AdministradorView();
+
+            model.Clientes = await _context.Clientes.ToListAsync();
+            model.Dispositivos = await _context.Dispositivos.Include(c => c.Cliente).Include(r => r.ListaReparacao).Include(f=>f.ListaFotografias).ToListAsync();
+            model.Funcionarios = await _context.Funcionarios.ToListAsync();
+            model.Reparacao = await _context.Reparacao.Include(d=>d).Include(f=>f.Funcionarios).ToListAsync();
+
+            return View(model);
         }
 
         // GET: Funcionarios/Details/5
