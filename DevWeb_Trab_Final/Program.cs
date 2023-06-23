@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// intruções para adicionar o serviço de acesso á DB (neste caso, SQL Server)
+// intruï¿½ï¿½es para adicionar o serviï¿½o de acesso ï¿½ DB (neste caso, SQL Server)
 builder.Services.AddDbContext<DevWeb_Trab_FinalContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DevWeb_Trab_FinalContext") ?? throw new InvalidOperationException("Connection string 'DevWeb_Trab_FinalContext' not found.")));
 
