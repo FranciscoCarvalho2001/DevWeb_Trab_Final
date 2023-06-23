@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230623162816_adminUser")]
+    partial class adminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,17 +100,17 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7e2ffa0b-8580-4c97-9822-3a9e3b14cf56",
-                            DataRegisto = new DateTime(2023, 6, 23, 17, 46, 2, 555, DateTimeKind.Local).AddTicks(3362),
+                            ConcurrencyStamp = "80680e5e-3962-4570-9ff1-b42a98accb45",
+                            DataRegisto = new DateTime(2023, 6, 23, 17, 28, 16, 398, DateTimeKind.Local).AddTicks(4368),
                             Email = "administrador@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NomeUtilizador = "Administrador",
                             NormalizedEmail = "ADMINISTRADOR@GMAIL.COM",
                             NormalizedUserName = "ADMINISTRADOR@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELnwrxN2YFHREKdQ3obwoMWWmIWcg8UnrEEwnVn2y5gpRaikDg7ovYDm3E1t37pMpg==",
+                            PasswordHash = "asdfghjklç",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45deb812-6db3-41b5-a8b5-7d1c8108472b",
+                            SecurityStamp = "c2032af1-46f1-4cbc-8344-0aef32672167",
                             TwoFactorEnabled = false,
                             UserName = "administrador@gmail.com"
                         });
@@ -315,19 +318,19 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a",
+                            Id = "1",
                             Name = "Administrador",
                             NormalizedName = "ADMINISTRADOR"
                         },
                         new
                         {
-                            Id = "f",
+                            Id = "2",
                             Name = "Funcionario",
                             NormalizedName = "FUNCIONARIO"
                         },
                         new
                         {
-                            Id = "c",
+                            Id = "3",
                             Name = "Cliente",
                             NormalizedName = "CLIENTE"
                         });
@@ -420,13 +423,6 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "1",
-                            RoleId = "a"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
