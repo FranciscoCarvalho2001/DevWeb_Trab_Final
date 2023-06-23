@@ -28,19 +28,19 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IUserStore<IdentityUser> _userStore;
-        private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly SignInManager<DevWeb_Trab_Final_User> _signInManager;
+        private readonly UserManager<DevWeb_Trab_Final_User> _userManager;
+        private readonly IUserStore<DevWeb_Trab_Final_User> _userStore;
+        private readonly IUserEmailStore<DevWeb_Trab_Final_User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         private readonly DevWeb_Trab_FinalContext _context;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            IUserStore<IdentityUser> userStore,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<DevWeb_Trab_Final_User> userManager,
+            IUserStore<DevWeb_Trab_Final_User> userStore,
+            SignInManager<DevWeb_Trab_Final_User> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             DevWeb_Trab_FinalContext context)
@@ -111,10 +111,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             /// 
             /// </summary>
             public Funcionarios Funcionario { get; set; }
-
-
         }
-
 
         /// <summary>
         /// método para reagir aos pedidos em GET
@@ -155,6 +152,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // adicionar ao Role "Funcionario"
                     await _userManager.AddToRoleAsync(user, "Funcionario");
 
                     // *******************************************
@@ -209,27 +207,27 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private IdentityUser CreateUser()
+        private DevWeb_Trab_Final_User CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<DevWeb_Trab_Final_User>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(DevWeb_Trab_Final_User)}'. " +
+                    $"Ensure that '{nameof(DevWeb_Trab_Final_User)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<IdentityUser> GetEmailStore()
+        private IUserEmailStore<DevWeb_Trab_Final_User> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<IdentityUser>)_userStore;
+            return (IUserEmailStore<DevWeb_Trab_Final_User>)_userStore;
         }
     }
 }

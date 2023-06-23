@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230622173101_MudaNomeContext")]
+    partial class MudaNomeContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace DevWeb_Trab_Final.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DevWeb_Trab_Final.Data.DevWeb_Trab_Final_User", b =>
+            modelBuilder.Entity("DevWeb_Trab_Final.Data.UserApplication", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -475,7 +478,7 @@ namespace DevWeb_Trab_Final.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DevWeb_Trab_Final.Data.DevWeb_Trab_Final_User", null)
+                    b.HasOne("DevWeb_Trab_Final.Data.UserApplication", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -484,7 +487,7 @@ namespace DevWeb_Trab_Final.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DevWeb_Trab_Final.Data.DevWeb_Trab_Final_User", null)
+                    b.HasOne("DevWeb_Trab_Final.Data.UserApplication", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -499,7 +502,7 @@ namespace DevWeb_Trab_Final.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DevWeb_Trab_Final.Data.DevWeb_Trab_Final_User", null)
+                    b.HasOne("DevWeb_Trab_Final.Data.UserApplication", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -508,7 +511,7 @@ namespace DevWeb_Trab_Final.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DevWeb_Trab_Final.Data.DevWeb_Trab_Final_User", null)
+                    b.HasOne("DevWeb_Trab_Final.Data.UserApplication", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

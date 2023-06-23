@@ -6,15 +6,20 @@ using DevWeb_Trab_Final.Models;
 
 namespace DevWeb_Trab_Final.Data
 {
-    public class ApplicationUser : IdentityUser
+    public class DevWeb_Trab_Final_User : IdentityUser
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string NomeUtilizador { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime DataRegisto { get; set; }
-
-
     }
-    public class DevWeb_Trab_FinalContext : IdentityDbContext<ApplicationUser>
+
+    public class DevWeb_Trab_FinalContext : IdentityDbContext<DevWeb_Trab_Final_User>
     {
         public DevWeb_Trab_FinalContext (DbContextOptions<DevWeb_Trab_FinalContext> options)
             : base(options)
