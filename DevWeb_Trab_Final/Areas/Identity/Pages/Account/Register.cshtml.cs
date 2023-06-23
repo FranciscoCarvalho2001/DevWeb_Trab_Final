@@ -141,8 +141,12 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.DataRegisto = DateTime.Now;
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.NomeUtilizador = Input.Funcionario.Nome;
 
                 // efetiva criação do USER
                 var result = await _userManager.CreateAsync(user, Input.Password);
