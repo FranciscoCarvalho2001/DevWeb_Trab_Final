@@ -111,6 +111,10 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             /// 
             /// </summary>
             public Funcionarios Funcionario { get; set; }
+
+            public Clientes Cliente { get; set; }
+
+            public bool flagAdmin { get; set; }
         }
 
         /// <summary>
@@ -146,7 +150,11 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                user.NomeUtilizador = Input.Funcionario.Nome;
+                if (Input.flagAdmin == true) {
+                    user.NomeUtilizador = Input.Funcionario.Nome;
+                } else {
+                    user.NomeUtilizador = Input.Cliente.Nome;
+                }
 
                 // efetiva criação do USER
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -156,25 +164,50 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // adicionar ao Role "Funcionario"
-                    await _userManager.AddToRoleAsync(user, "Funcionario");
+                    if (Input.flagAdmin == true) {
 
-                    // *******************************************
-                    // adicionar os dados do Funcionario á DB
-                    // *******************************************
+                        // adicionar ao Role "Funcionario"
+                        await _userManager.AddToRoleAsync(user, "Funcionario");
 
-                    //atualizar os dados do objeto FUNCIONARIO
-                    Input.Funcionario.Email = Input.Email;
-                    Input.Funcionario.UserId = user.Id;
+                        // *******************************************
+                        // adicionar os dados do Funcionario á DB
+                        // *******************************************
 
-                    try {
-                        //adiconar os dados á DB
-                        _context.Add(Input.Funcionario);
-                        await _context.SaveChangesAsync();
-                    } catch (Exception) {
-                        //remover os dados á DB
-                        _context.Remove(Input.Funcionario);
-                        await _context.SaveChangesAsync();
+                        //atualizar os dados do objeto FUNCIONARIO
+                        Input.Funcionario.Email = Input.Email;
+                        Input.Funcionario.UserId = user.Id;
+
+                        try {
+                            //adiconar os dados á DB
+                            _context.Add(Input.Funcionario);
+                            await _context.SaveChangesAsync();
+                        } catch (Exception) {
+                            //remover os dados á DB
+                            _context.Remove(Input.Funcionario);
+                            await _context.SaveChangesAsync();
+                        }
+                    } else {
+
+                        // adicionar ao Role "Funcionario"
+                        await _userManager.AddToRoleAsync(user, "Cliente");
+
+                        // *******************************************
+                        // adicionar os dados do Funcionario á DB
+                        // *******************************************
+
+                        //atualizar os dados do objeto FUNCIONARIO
+                        Input.Cliente.Email = Input.Email;
+                        Input.Cliente.UserId = user.Id;
+
+                        try {
+                            //adiconar os dados á DB
+                            _context.Add(Input.Cliente);
+                            await _context.SaveChangesAsync();
+                        } catch (Exception) {
+                            //remover os dados á DB
+                            _context.Remove(Input.Cliente);
+                            await _context.SaveChangesAsync();
+                        }
                     }
 
                     // *******************************************

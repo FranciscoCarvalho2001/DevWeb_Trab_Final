@@ -12,8 +12,15 @@
 
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
-            <input asp-for="Input.Funcionario.Email" value="a@gmail.com" type="hidden" />
-
+            @if (User.IsInRole("Administrador")) {
+                <input asp-for="Input.Funcionario.Email" value="a@gmail.com" type="hidden" />
+                <input asp-for="Input.flagAdmin" value="true" type="hidden" />
+            }
+            @if (User.IsInRole("Funcionario") || !User.Identity.IsAuthenticated) {
+                <input asp-for="Input.Cliente.Email" value="a@gmail.com" type="hidden" />
+                <input asp-for="Input.flagAdmin" value="false" type="hidden" />
+            }
+            
             <div class="row">
                 <div class"col-md-6">
                     <hr />
@@ -37,39 +44,79 @@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-                <div class"col-md-6">
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Funcionario.Nome" class="form-control" />
-                        <label asp-for="Input.Funcionario.Nome">Nome</label>
-                        <span asp-validation-for="Input.Funcionario.Nome" class="text-danger"></span>
-                    </div>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <div class"col-md-6">
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Funcionario.Morada" class="form-control" />
-                        <label asp-for="Input.Funcionario.Morada">Morada</label>
-                        <span asp-validation-for="Input.Funcionario.Morada" class="text-danger"></span>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Nome" class="form-control" />
+                            <label asp-for="Input.Funcionario.Nome">Nome</label>
+                            <span asp-validation-for="Input.Funcionario.Nome" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Funcionario.CodPostal" class="form-control" />
-                        <label asp-for="Input.Funcionario.CodPostal">Código Postal</label>
-                        <span asp-validation-for="Input.Funcionario.CodPostal" class="text-danger"></span>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Morada" class="form-control" />
+                            <label asp-for="Input.Funcionario.Morada">Morada</label>
+                            <span asp-validation-for="Input.Funcionario.Morada" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Funcionario.Telemovel" class="form-control" />
-                        <label asp-for="Input.Funcionario.Telemovel">Telemóvel</label>
-                        <span asp-validation-for="Input.Funcionario.Telemovel" class="text-danger"></span>
-                    </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.CodPostal" class="form-control" />
+                            <label asp-for="Input.Funcionario.CodPostal">Código Postal</label>
+                            <span asp-validation-for="Input.Funcionario.CodPostal" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Input.Funcionario.Especializacao" class="form-control" />
-                        <label asp-for="Input.Funcionario.Especializacao">Especializacao</label>
-                        <span asp-validation-for="Input.Funcionario.Especializacao" class="text-danger"></span>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Telemovel" class="form-control" />
+                            <label asp-for="Input.Funcionario.Telemovel">Telemóvel</label>
+                            <span asp-validation-for="Input.Funcionario.Telemovel" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Especializacao" class="form-control" />
+                            <label asp-for="Input.Funcionario.Especializacao">Especialização</label>
+                            <span asp-validation-for="Input.Funcionario.Especializacao" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
                     </div>
-                </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
+                }
+                @if (User.IsInRole("Funcionario") || !User.Identity.IsAuthenticated)
+                {
+                    <div class"col-md-6">
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Nome" class="form-control" />
+                            <label asp-for="Input.Cliente.Nome">Nome</label>
+                            <span asp-validation-for="Input.Cliente.Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Morada" class="form-control" />
+                            <label asp-for="Input.Cliente.Morada">Morada</label>
+                            <span asp-validation-for="Input.Cliente.Morada" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.CodPostal" class="form-control" />
+                            <label asp-for="Input.Cliente.CodPostal">Código Postal</label>
+                            <span asp-validation-for="Input.Cliente.CodPostal" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Telemovel" class="form-control" />
+                            <label asp-for="Input.Cliente.Telemovel">Telemóvel</label>
+                            <span asp-validation-for="Input.Cliente.Telemovel" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.NIF" class="form-control" />
+                            <label asp-for="Input.Cliente.NIF">Número Identificação Fiscal</label>
+                            <span asp-validation-for="Input.Cliente.NIF" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
+                    </div>
+                }
             </div>
         </form>
     </div>
