@@ -1,0 +1,157 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h2>Criar um novo utilizador.</h2>
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+            @if (User.IsInRole("Administrador")) {
+                <input asp-for="Input.Funcionario.Email" value="a@gmail.com" type="hidden" />
+                <input asp-for="Input.flagAdmin" value="true" type="hidden" />
+            }
+            @if (User.IsInRole("Funcionario") || !User.Identity.IsAuthenticated) {
+                <input asp-for="Input.Cliente.Email" value="a@gmail.com" type="hidden" />
+                <input asp-for="Input.flagAdmin" value="false" type="hidden" />
+            }
+            
+            <div class="row">
+                <div class"col-md-6">
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                @if (User.IsInRole("Administrador"))
+                {
+                    <div class"col-md-6">
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Nome" class="form-control" />
+                            <label asp-for="Input.Funcionario.Nome">Nome</label>
+                            <span asp-validation-for="Input.Funcionario.Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Morada" class="form-control" />
+                            <label asp-for="Input.Funcionario.Morada">Morada</label>
+                            <span asp-validation-for="Input.Funcionario.Morada" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.CodPostal" class="form-control" />
+                            <label asp-for="Input.Funcionario.CodPostal">Código Postal</label>
+                            <span asp-validation-for="Input.Funcionario.CodPostal" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Telemovel" class="form-control" />
+                            <label asp-for="Input.Funcionario.Telemovel">Telemóvel</label>
+                            <span asp-validation-for="Input.Funcionario.Telemovel" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Funcionario.Especializacao" class="form-control" />
+                            <label asp-for="Input.Funcionario.Especializacao">Especialização</label>
+                            <span asp-validation-for="Input.Funcionario.Especializacao" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
+                    </div>
+                }
+                @if (User.IsInRole("Funcionario") || !User.Identity.IsAuthenticated)
+                {
+                    <div class"col-md-6">
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Nome" class="form-control" />
+                            <label asp-for="Input.Cliente.Nome">Nome</label>
+                            <span asp-validation-for="Input.Cliente.Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Morada" class="form-control" />
+                            <label asp-for="Input.Cliente.Morada">Morada</label>
+                            <span asp-validation-for="Input.Cliente.Morada" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.CodPostal" class="form-control" />
+                            <label asp-for="Input.Cliente.CodPostal">Código Postal</label>
+                            <span asp-validation-for="Input.Cliente.CodPostal" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.Telemovel" class="form-control" />
+                            <label asp-for="Input.Cliente.Telemovel">Telemóvel</label>
+                            <span asp-validation-for="Input.Cliente.Telemovel" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Cliente.NIF" class="form-control" />
+                            <label asp-for="Input.Cliente.NIF">Número Identificação Fiscal</label>
+                            <span asp-validation-for="Input.Cliente.NIF" class="text-danger"></span>
+                        </div>
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registar</button>
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

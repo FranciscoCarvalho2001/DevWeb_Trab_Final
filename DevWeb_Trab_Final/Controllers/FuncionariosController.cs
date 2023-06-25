@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DevWeb_Trab_Final.Data;
 using DevWeb_Trab_Final.Models;
+using DevWeb_Trab_Final.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevWeb_Trab_Final.Controllers
 {
+    [Authorize(Roles = "Administrador, Funcionario")]
     public class FuncionariosController : Controller
     {
         private readonly DevWeb_Trab_FinalContext _context;
@@ -22,7 +25,20 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Funcionarios
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Funcionarios.ToListAsync());
+            return View(await _context.Funcionarios.ToListAsync());
+        }
+
+        
+        public async Task<IActionResult> Administrador()
+        {
+            var model = new AdministradorView();
+
+            model.Clientes = await _context.Clientes.ToListAsync();
+            model.Dispositivos = await _context.Dispositivos.Include(c => c.Cliente).Include(r => r.ListaReparacao).Include(f=>f.ListaFotografias).ToListAsync();
+            model.Funcionarios = await _context.Funcionarios.ToListAsync();
+            model.Reparacao = await _context.Reparacao.Include(d=>d.Dispositivo).Include(f=>f.Funcionarios).ToListAsync();
+
+            return View(model);
         }
 
         // GET: Funcionarios/Details/5
