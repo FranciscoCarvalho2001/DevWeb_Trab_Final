@@ -21,14 +21,17 @@
 
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario")){
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Clientes</button>
+            <h2 class="accordion-header" id="headingClientes">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="false" aria-controls="collapseClientes">Clientes</button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div id="collapseClientes" class="accordion-collapse collapse" aria-labelledby="headingClientes" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>
-                        <a asp-action="Create">Create New</a>
-                    </p>
+                    @if (User.IsInRole("Funcionario"))
+                    {
+                        <p>
+                            <a asp-area="Identity" asp-page="/Account/Register">Registar novo cliente</a>
+                        </p>
+                    }
                     <table class="table">
                         <thead>
                             <tr>
@@ -50,6 +53,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Clientes.First().Telemovel)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Clientes.First().UserId)
+                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -59,6 +65,9 @@
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NIF)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Morada)
@@ -76,9 +85,9 @@
                                         @Html.DisplayFor(modelItem => item.UserId)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        <a asp-controller="Clientes" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-controller="Clientes" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-controller="Clientes" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
                                     </td>
                                 </tr>
                             }
@@ -91,13 +100,13 @@
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario"))
     {
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Clientes</button>
+            <h2 class="accordion-header" id="headingReparacoes">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReparacoes" aria-expanded="false" aria-controls="collapseReparacoes">Reparações</button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div id="collapseReparacoes" class="accordion-collapse collapse" aria-labelledby="headingReparacoes" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <p>
-                        <a asp-action="Create">Create New</a>
+                        <a asp-controller="Reparacaos" asp-action="Create" >Criar novo registo</a>
                     </p>
                     <table class="table">
                         <thead>
@@ -146,9 +155,9 @@
                                         @Html.DisplayFor(modelItem => item.Funcionarios.Id)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        <a asp-controller="Reparacao" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-controller="Reparacao" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-controller="Reparacao" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
                                     </td>
                                 </tr>
                             }
@@ -160,14 +169,14 @@
     }
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario"))
     {
-         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Clientes</button>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingDispositivos">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDispositivos" aria-expanded="false" aria-controls="collapseDispositivos">Dispositivos</button>
             </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div id="collapseDispositivos" class="accordion-collapse collapse" aria-labelledby="headingDispositivos" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <p>
-                        <a asp-action="Create">Create New</a>
+                        <a asp-controller="Dispositivos" asp-action="Create">Criar novo registo</a>
                     </p>
                     <table class="table">
                         <thead>
@@ -210,9 +219,79 @@
                                         @Html.DisplayFor(modelItem => item.Cliente.Email)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                        <a asp-controller="Dispositivos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-controller="Dispositivos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-controller="Dispositivos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    @if (User.IsInRole("Administrador") )
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFuncionarios">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFuncionarios" aria-expanded="false" aria-controls="collapseFuncionarios">Funcionarios</button>
+            </h2>
+            <div id="collapseFuncionarios" class="accordion-collapse collapse" aria-labelledby="headingFuncionarios" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                        <a asp-area="Identity" asp-page="/Account/Register">Registar novo Funcionario</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().Nome)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().Morada)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().CodPostal)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().Telemovel)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Funcionarios.First().Especializacao)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Funcionarios)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Morada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CodPostal)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Telemovel)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Especializacao)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
                                     </td>
                                 </tr>
                             }

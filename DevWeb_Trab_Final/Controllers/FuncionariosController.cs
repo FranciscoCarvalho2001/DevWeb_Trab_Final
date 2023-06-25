@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DevWeb_Trab_Final.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador, Funcionario")]
     public class FuncionariosController : Controller
     {
         private readonly DevWeb_Trab_FinalContext _context;
