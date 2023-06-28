@@ -22,7 +22,7 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Reparacaos
         public async Task<IActionResult> Index()
         {
-            var devWeb_Trab_FinalContext = _context.Reparacao.Include(r => r.Dispositivo).Include(r => r.Funcionarios);
+            var devWeb_Trab_FinalContext = _context.Reparacao.Include(r => r.Dispositivo).Include(f => f.Funcionarios);
             return View(await devWeb_Trab_FinalContext.ToListAsync());
         }
 
@@ -104,7 +104,10 @@ namespace DevWeb_Trab_Final.Controllers
             {
                 return NotFound();
             }
-
+            if (!string.IsNullOrEmpty(reparacao.CustoAux))
+            {
+                reparacao.Custo = Convert.ToDecimal(reparacao.CustoAux.Replace('.', ','));
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -123,7 +126,8 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
+
             }
             ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Id", reparacao.DispositivoFK);
             ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Id", reparacao.FuncionariosFK);
@@ -166,7 +170,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Administrador", "Funcionarios");
         }
 
         private bool ReparacaoExists(int id)

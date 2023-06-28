@@ -56,7 +56,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Clientes.First().UserId)
                                 </th>
-                                <th></th>
+                                <th>
+                                    Opções
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,7 +131,10 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Reparacao.First().Funcionarios)
                                 </th>
-                    
+                                <th>
+                                    Opções
+                                </th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -155,9 +160,9 @@
                                         @Html.DisplayFor(modelItem => item.Funcionarios.Id)
                                     </td>
                                     <td>
-                                        <a asp-controller="Reparacao" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                        <a asp-controller="Reparacao" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                                        <a asp-controller="Reparacao" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                        <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-controller="Reparacaos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-controller="Reparacaos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
                                     </td>
                                 </tr>
                             }
@@ -196,34 +201,39 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Dispositivos.First().Cliente)
                                 </th>
-
+                                <th>
+                                    Opções
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.Dispositivos)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Tipo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DataReg)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Modelo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estado)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Cliente.Email)
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Dispositivos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                        <a asp-controller="Dispositivos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                                        <a asp-controller="Dispositivos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
-                                    </td>
-                                </tr>
+                                @if (item.ListaReparacao.Any() && item.ListaReparacao.Last().DataFim == null)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tipo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataReg)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Modelo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cliente.Email)
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Dispositivos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-controller="Dispositivos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                            <a asp-controller="Dispositivos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -263,7 +273,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Funcionarios.First().Especializacao)
                                 </th>
-                                <th></th>
+                                <th>
+                                    Opções
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
