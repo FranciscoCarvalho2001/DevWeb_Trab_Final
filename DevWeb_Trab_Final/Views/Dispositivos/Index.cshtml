@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<DevWeb_Trab_Final.Models.Dispositivos>
+
 @{
     ViewData["Title"] = "Index";
 }
-
 @{
     var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Cliente.Email))?.Cliente;
 }
+
 @if(User.IsInRole("Cliente")){
     @if (cliente!= null)
     {

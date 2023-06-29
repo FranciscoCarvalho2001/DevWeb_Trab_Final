@@ -22,7 +22,7 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Reparacaos
         public async Task<IActionResult> Index()
         {
-            var devWeb_Trab_FinalContext = _context.Reparacao.Include(r => r.Dispositivo).Include(f => f.Funcionarios);
+            var devWeb_Trab_FinalContext = _context.Reparacao.Include(r => r.Dispositivo).Include(f => f.Funcionarios).Include(c => c.Dispositivo.Cliente);
             return View(await devWeb_Trab_FinalContext.ToListAsync());
         }
 

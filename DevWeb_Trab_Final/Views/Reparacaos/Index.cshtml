@@ -3,64 +3,49 @@
 @{
     ViewData["Title"] = "Index";
 }
+@{
+    var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Dispositivo.Cliente.Email))?.Dispositivo.Cliente.Email;
 
-<h1>Index</h1>
+    var dispositivo = Model.Where(d => d.Dispositivo.Cliente.Email == cliente);
+    //var dispositivo = Model.FirstOrDefault(d => d.Dispositivo.Id.Equals(d.DispositivoFK))?.Dispositivo;
+    //var cliente = Model.FirstOrDefault(c => c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.ClienteFK;
+    //var cliente = Model.FirstOrDefault(c => c.Dispositivo != null && c.Dispositivo.Cliente != null && c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.Cliente;
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Custo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dispositivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Funcionarios)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Custo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dispositivo.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Funcionarios.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+
+@if (User.IsInRole("Cliente")) {
+
+    @if(cliente != null) {
+
+        <h2>Reparações do @cliente</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Modelo</th>
+                    <th>Data Inicio</th>
+                    <th>Data Fim</th>
+                    <th>FK Dispositivo</th>
+                    <th>FK Funcionario </th>
+                    <th>Nome Funcionario</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var reparacao in dispositivo) {
+                    <tr>
+                        <td>@reparacao.Dispositivo.Tipo</td>
+                        <td>@reparacao.Dispositivo.Modelo</td>
+                        <td>@reparacao.DataInicio</td>
+                        <td>@reparacao.DataFim</td>
+                        <td>@reparacao.DispositivoFK</td>
+                        <td>@reparacao.FuncionariosFK</td>
+                        <td>@reparacao.Funcionarios.Nome</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
     
