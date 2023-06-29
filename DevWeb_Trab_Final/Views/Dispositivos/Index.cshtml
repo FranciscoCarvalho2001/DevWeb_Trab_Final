@@ -7,41 +7,36 @@
     var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Cliente.Email))?.Cliente;
 }
 
-@if(User.IsInRole("Cliente")){
-    @if (cliente!= null)
+@if (User.IsInRole("Cliente"))
+{
+    @if (cliente != null)
     {
-        <h2>Dispositivos de @cliente.Nome</h2>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Data de Registro</th>
-                    <th>Modelo</th>
-                    <th>Estado</th>
-                    <th>Fotografia</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var dispositivo in cliente.ListaDipositivos)
-                {
-                   
-                     <tr>
-                        <td>@dispositivo.Tipo</td>
-                        <td>@dispositivo.DataReg</td>
-                        <td>@dispositivo.Modelo</td>
-                        <td>@dispositivo.Estado</td>
-                        <td>
-                            @foreach (var foto in dispositivo.ListaFotografias) {
-                                <p>
-                                    <img src="~/imagens/@foto.NomeFoto"
-                                         width="100px" />
-                                </p>
-                            }
-                        </td>
-                     </tr>
-                }
-            </tbody>
-        </table>
+        <h2>Dispositivos de @cliente.Nome</h2><br />
+        <div class="row">
+            @foreach (var dispositivo in cliente.ListaDipositivos)
+            {
+                <div class="col-md-4 col-lg-4 col-xl-4 mb-4">
+                    <div class="card bg-light mb-3" style="width: 18rem;">
+                        @foreach (var foto in dispositivo.ListaFotografias)
+                        {
+                            <center><img src="~/imagens/@foto.NomeFoto" alt="Fotografia do Dispositivo @foto.NomeFoto" title="@dispositivo.Modelo" class="img-thumbnail img-fluid"></center>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">@dispositivo.Estado</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@dispositivo.Tipo</li>
+                            <li class="list-group-item">@dispositivo.Modelo</li>
+                            <li class="list-group-item">@dispositivo.DataReg</li>
+                        </ul>
+                        <div class="card-body">
+                            <a asp-action="Details" asp-route-id="@dispositivo.Id">Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     }
 }
+

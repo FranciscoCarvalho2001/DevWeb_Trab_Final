@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
 }
 @{
-    var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Dispositivo.Cliente.Email))?.Dispositivo.Cliente.Email;
+    var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Dispositivo.Cliente.Email))?.Dispositivo.Cliente;
 
-    var dispositivo = Model.Where(d => d.Dispositivo.Cliente.Email == cliente);
+    var dispositivo = Model.Where(d => d.Dispositivo.Cliente.Email == cliente.Email);
     //var dispositivo = Model.FirstOrDefault(d => d.Dispositivo.Id.Equals(d.DispositivoFK))?.Dispositivo;
     //var cliente = Model.FirstOrDefault(c => c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.ClienteFK;
     //var cliente = Model.FirstOrDefault(c => c.Dispositivo != null && c.Dispositivo.Cliente != null && c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.Cliente;
@@ -15,9 +15,9 @@
 
 @if (User.IsInRole("Cliente")) {
 
-    @if(cliente != null) {
+    @if(cliente.Email != null) {
 
-        <h2>Reparações do @cliente</h2>
+        <h2>Reparações do @cliente.Nome</h2>
 
         <table class="table">
             <thead>
@@ -26,8 +26,6 @@
                     <th>Modelo</th>
                     <th>Data Inicio</th>
                     <th>Data Fim</th>
-                    <th>FK Dispositivo</th>
-                    <th>FK Funcionario </th>
                     <th>Nome Funcionario</th>
 
                 </tr>
@@ -39,8 +37,6 @@
                         <td>@reparacao.Dispositivo.Modelo</td>
                         <td>@reparacao.DataInicio</td>
                         <td>@reparacao.DataFim</td>
-                        <td>@reparacao.DispositivoFK</td>
-                        <td>@reparacao.FuncionariosFK</td>
                         <td>@reparacao.Funcionarios.Nome</td>
                     </tr>
                 }

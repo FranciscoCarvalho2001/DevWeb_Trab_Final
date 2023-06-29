@@ -132,7 +132,7 @@ namespace DevWeb_Trab_Final.Controllers
                         await imagemDispositivo.CopyToAsync(stream);
                     }
                     // devolver o controlo da app para a página do início
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Administrador", "Funcionarios");
                 } catch (Exception) {
                     ModelState.AddModelError("", "Ocurreu um erro com a adição dos dados do seu Dispositivo");
                     // trow;

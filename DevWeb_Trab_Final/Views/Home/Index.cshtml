@@ -1,14 +1,32 @@
-﻿@{
+﻿@model IEnumerable<DevWeb_Trab_Final.Models.Funcionarios>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container custom-container">
     <div class="row">
         <div class="col custom-column">
-            
-                <div class="corpo">
-                    <h1 class="text-dark"> Serviço de Reparação de Electrodomésticos</h1>
+            <div class="corpo">
+                <h1 class="text-dark"> Serviço de Reparação de Electrodomésticos</h1>
+            </div><br /><br />
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingClientes">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="true" aria-controls="collapseClientes">Prestamos serviços relacionados a ...</button>
+                    </h2>
+                    <div id="collapseClientes" class="accordion-collapse collapse show" aria-labelledby="headingClientes" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                @foreach (var especializacao in Model.Select(f => f.Especializacao).Distinct())
+                                {
+                                    <li>@especializacao</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </div>
         <div class="col custom-column1">
             <img src="~/imagens/reparatech.png" alt="..." class="img-fluid" alt="Responsive image">
