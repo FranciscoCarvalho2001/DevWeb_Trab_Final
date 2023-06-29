@@ -19,6 +19,7 @@
                     <th>Data de Registro</th>
                     <th>Modelo</th>
                     <th>Estado</th>
+                    <th>Fotografia</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,17 +27,21 @@
                 {
                    
                      <tr>
-                         <td>@dispositivo.Tipo</td>
-                         <td>@dispositivo.DataReg</td>
-                         <td>@dispositivo.Modelo</td>
-                         <td>@dispositivo.Estado</td>
+                        <td>@dispositivo.Tipo</td>
+                        <td>@dispositivo.DataReg</td>
+                        <td>@dispositivo.Modelo</td>
+                        <td>@dispositivo.Estado</td>
+                        <td>
+                            @foreach (var foto in dispositivo.ListaFotografias) {
+                                <p>
+                                    <img src="~/imagens/@foto.NomeFoto"
+                                         width="100px" />
+                                </p>
+                            }
+                        </td>
                      </tr>
-                      
                 }
             </tbody>
         </table>
-
-      
     }
-    
 }

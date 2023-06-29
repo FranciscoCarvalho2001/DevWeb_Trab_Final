@@ -28,7 +28,10 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Dispositivos
         public async Task<IActionResult> Index()
         {
-            var devWeb_Trab_FinalContext = _context.Dispositivos.Include(d => d.Cliente).Include(l=>l.ListaReparacao);
+            var devWeb_Trab_FinalContext = _context.Dispositivos
+                .Include(d => d.Cliente)
+                .Include(l => l.ListaReparacao)
+                .Include(f => f.ListaFotografias);
             return View(await devWeb_Trab_FinalContext.ToListAsync());
         }
 
