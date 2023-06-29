@@ -49,8 +49,8 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Reparacaos/Create
         public IActionResult Create()
         {
-            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Id");
-            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Id");
+            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Tipo");
+            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Nome");
             return View();
         }
 
@@ -68,9 +68,10 @@ namespace DevWeb_Trab_Final.Controllers
             {
                 _context.Add(reparacao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
             }
-            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Modelo", reparacao.DispositivoFK);
+
+            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Tipo", reparacao.DispositivoFK);
             ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Nome", reparacao.FuncionariosFK);
             return View(reparacao);
         }
@@ -78,18 +79,21 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Reparacaos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var reparacao = await _context.Reparacao.FindAsync(id);
+            
+                reparacao.CustoAux = Convert.ToString(reparacao.Custo);
+            
             if (id == null || _context.Reparacao == null)
             {
                 return NotFound();
             }
 
-            var reparacao = await _context.Reparacao.FindAsync(id);
             if (reparacao == null)
             {
                 return NotFound();
             }
-            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Id", reparacao.DispositivoFK);
-            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Id", reparacao.FuncionariosFK);
+            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Tipo", reparacao.DispositivoFK);
+            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Nome", reparacao.FuncionariosFK);
             return View(reparacao);
         }
 
@@ -129,8 +133,8 @@ namespace DevWeb_Trab_Final.Controllers
                 return RedirectToAction("Administrador", "Funcionarios");
 
             }
-            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Id", reparacao.DispositivoFK);
-            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Id", reparacao.FuncionariosFK);
+            ViewData["DispositivoFK"] = new SelectList(_context.Dispositivos, "Id", "Tipo", reparacao.DispositivoFK);
+            ViewData["FuncionariosFK"] = new SelectList(_context.Funcionarios, "Id", "Nome", reparacao.FuncionariosFK);
             return View(reparacao);
         }
 

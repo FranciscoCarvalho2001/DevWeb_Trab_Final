@@ -110,6 +110,63 @@
                     <p>
                         <a asp-controller="Reparacaos" asp-action="Create" >Criar novo registo</a>
                     </p>
+                    <h3>Reparações por concluir</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().DataInicio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Custo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Observacao)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Dispositivo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Funcionarios)
+                                </th>
+                                <th>
+                                    Opções
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Reparacao)
+                            {
+                                @if (item.DataFim == null)
+                                {
+                                    <tr>
+                                        <td>
+                                        @Html.DisplayFor(modelItem => item.DataInicio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Custo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Observacao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dispositivo.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Funcionarios.Id)
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                        <a asp-controller="Reparacaos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                        <a asp-controller="Reparacaos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <h3>Reparações concluídas</h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -140,31 +197,34 @@
                         <tbody>
                             @foreach (var item in Model.Reparacao)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DataInicio)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.DataFim)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Custo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Observacao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Dispositivo.Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Funcionarios.Id)
-                                    </td>
-                                    <td>
-                                        <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                        <a asp-controller="Reparacaos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                                        <a asp-controller="Reparacaos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
-                                    </td>
-                                </tr>
+                                @if (item.DataFim.HasValue)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataInicio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataFim)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Custo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Observacao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Dispositivo.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Funcionarios.Id)
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-controller="Reparacaos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                            <a asp-controller="Reparacaos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -183,6 +243,7 @@
                     <p>
                         <a asp-controller="Dispositivos" asp-action="Create">Criar novo registo</a>
                     </p>
+                    <h3>Dispositivos por reparar</h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -209,7 +270,62 @@
                         <tbody>
                             @foreach (var item in Model.Dispositivos)
                             {
-                                @if (item.ListaReparacao.Any() && item.ListaReparacao.Last().DataFim == null)
+                                @if (item.ListaReparacao.Count == 0 || item.ListaReparacao.Any() && item.ListaReparacao.Last().DataFim == null)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tipo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DataReg)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Modelo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cliente.Email)
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Dispositivos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-controller="Dispositivos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                            <a asp-controller="Dispositivos" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <h3>Dispositivos reparado</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dispositivos.First().Tipo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dispositivos.First().DataReg)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dispositivos.First().Modelo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dispositivos.First().Estado)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Dispositivos.First().Cliente)
+                                </th>
+                                <th>
+                                    Opções
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Dispositivos)
+                            {
+                                @if (item.ListaReparacao.Any() && item.ListaReparacao.Last().DataFim.HasValue)
                                 {
                                     <tr>
                                         <td>

@@ -5,10 +5,13 @@
 <div class="container custom-container">
     <div class="row">
         <div class="col custom-column">
-            <!-- Conteúdo da primeira coluna -->
+            
+                <div class="corpo">
+                    <h1 class="text-dark"> Serviço de Reparação de Electrodomésticos</h1>
+                </div>
         </div>
         <div class="col custom-column1">
-            <img src="~/imagens/reparatech.jpg" alt="..." class="img-fluid" alt="Responsive image">
+            <img src="~/imagens/reparatech.png" alt="..." class="img-fluid" alt="Responsive image">
         </div>
     </div>
 </div>
@@ -23,13 +26,25 @@
     }
 
     .custom-column {
-        background-color: #69D7FF;
+
         padding-right: 0;
         padding-left: 0;
     }
     .custom-column{
-        background-color: #69D7FF;
+
         padding-right: 0;
         padding-left: 0;
     }
+
+    .corpo {
+        display: table;
+    }
+
+        .corpo p {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+
 </style>
