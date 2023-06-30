@@ -93,7 +93,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "A {0} precisa de ter no mínimo entre {2} e no máximo {1} caractéres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -103,8 +103,8 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar Password")]
+            [Compare("Password", ErrorMessage = "A Nova Password e a Confirmação Password não são iguais.")]
             public string ConfirmPassword { get; set; }
 
             /// <summary>

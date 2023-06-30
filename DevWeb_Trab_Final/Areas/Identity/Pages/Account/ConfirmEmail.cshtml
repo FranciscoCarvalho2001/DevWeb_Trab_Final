@@ -1,17 +1,17 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Confirmar Email";
 }
 
 <h1>@ViewData["Title"]</h1>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 @section Scripts {
     <script>
-        var timeoutMilliseconds = 5000; // 5000 milisegundos = 5 segundos
+        var timeout = 3000; // 3000 milisegundos = 3 segundos
 
         setTimeout(function () {
             window.location.href = '@Url.Page("/Home/Index")';
-        }, timeoutMilliseconds);
+        }, timeout);
     </script>
 }
