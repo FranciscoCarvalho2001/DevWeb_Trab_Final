@@ -189,7 +189,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
             }
             ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
             return View(dispositivos);
@@ -230,7 +230,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Administrador", "Funcionarios");
         }
 
         private bool DispositivosExists(int id)

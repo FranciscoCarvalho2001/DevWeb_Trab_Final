@@ -151,10 +151,10 @@
                                         @Html.DisplayFor(modelItem => item.Observacao)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Dispositivo.Id)
+                                        @Html.DisplayFor(modelItem => item.Dispositivo.Tipo)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Funcionarios.Id)
+                                        @Html.DisplayFor(modelItem => item.Funcionarios.Nome)
                                     </td>
                                     <td>
                                         <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
@@ -213,10 +213,10 @@
                                             @Html.DisplayFor(modelItem => item.Observacao)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Dispositivo.Id)
+                                            @Html.DisplayFor(modelItem => item.Dispositivo.Tipo)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Funcionarios.Id)
+                                            @Html.DisplayFor(modelItem => item.Funcionarios.Nome)
                                         </td>
                                         <td>
                                             <a asp-controller="Reparacaos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

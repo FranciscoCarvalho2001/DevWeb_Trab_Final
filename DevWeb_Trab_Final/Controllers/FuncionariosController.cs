@@ -127,7 +127,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
             }
             return View(funcionarios);
         }
@@ -166,7 +166,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Administrador", "Funcionarios");
         }
 
         private bool FuncionariosExists(int id)
