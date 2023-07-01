@@ -83,16 +83,18 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            
+            [EmailAddress(ErrorMessage = "O {0} não está escrito corretamente")]
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
+            [RegularExpression("[a-z._0-9]+@+[a-z]+.com")]
+            [StringLength(40)]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
             [StringLength(100, ErrorMessage = "A {0} precisa de ter no mínimo entre {2} e no máximo {1} caractéres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -102,6 +104,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirmar Password")]
             [Compare("Password", ErrorMessage = "A Nova Password e a Confirmação Password não são iguais.")]
