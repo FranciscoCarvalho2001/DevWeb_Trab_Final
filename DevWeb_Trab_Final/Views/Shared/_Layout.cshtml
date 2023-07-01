@@ -7,10 +7,40 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DevWeb_Trab_Final.styles.css" asp-append-version="true" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Nabla&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+
 </head>
+<style>
+
+    .navbar-brand {
+        font-family: 'Nabla', cursive;
+    }
+
+    .navbar-collapse ul li::after {
+        content: '';
+        width: 0%;
+        height: 1px;
+        background: #f5d57f;
+        display: block;
+        margin: auto;
+        transition: 0.2s;
+    }
+
+    .navbar-collapse ul li:hover::after {
+        width: 100%;
+    }
+
+</style>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ReparaTECH</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,23 +50,23 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Página Inicial</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             @if (User.IsInRole("Cliente") )
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Dispositivos" asp-action="Index">Dispositivos</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Dispositivos" asp-action="Index">Dispositivos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reparacaos" asp-action="Index">Reparações</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Reparacaos" asp-action="Index">Reparações</a>
                                 </li>
                             }
                             @if (User.IsInRole("Funcionario") || User.IsInRole("Administrador"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Funcionarios" asp-action="Administrador">Administrador</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Funcionarios" asp-action="Administrador">Administrador</a>
                                 </li>
                             }
                             
@@ -55,7 +85,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             &copy; 2023 - ReparaTech - <a asp-area="" asp-controller="Home" asp-action="Privacy">Política de Privacidade</a>
         </div>
