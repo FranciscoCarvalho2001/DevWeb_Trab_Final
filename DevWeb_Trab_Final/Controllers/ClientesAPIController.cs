@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DevWeb_Trab_Final.Data;
 using DevWeb_Trab_Final.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DevWeb_Trab_Final.Controllers
 {
@@ -15,9 +16,15 @@ namespace DevWeb_Trab_Final.Controllers
     public class ClientesAPIController : ControllerBase
     {
         private readonly DevWeb_Trab_FinalContext _context;
+        private readonly UserManager<DevWeb_Trab_Final_User> _userManager;
+        private readonly SignInManager<DevWeb_Trab_Final_User> _signInManager;
 
-        public ClientesAPIController(DevWeb_Trab_FinalContext context)
+        public ClientesAPIController(DevWeb_Trab_FinalContext context,
+            UserManager<DevWeb_Trab_Final_User> userManager,
+            SignInManager<DevWeb_Trab_Final_User> signInManager)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             _context = context;
         }
 
@@ -75,13 +82,42 @@ namespace DevWeb_Trab_Final.Controllers
 
         // POST: api/ClientesAPI
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<Clientes>> PostClientes(Clientes clientes)
         {
-            _context.Clientes.Add(clientes);
-            await _context.SaveChangesAsync();
+            var user = new DevWeb_Trab_Final_User {
+                UserName = clientes.Email,
+                Email = clientes.Email,
+                NomeUtilizador = clientes.Nome,
+                EmailConfirmed = true,
+                DataRegisto = DateTime.Now
+            };
 
-            return CreatedAtAction("GetClientes", new { id = clientes.Id }, clientes);
+            string password = Request.Query["password"];
+
+            var result = await _userManager.CreateAsync(user, password);
+
+            if(result.Succeeded) {
+                await _userManager.AddToRoleAsync(user, "Cliente");
+
+                clientes.UserId = user.Id;
+
+                try {
+                    //adiconar os dados á DB
+                    _context.Clientes.Add(clientes);
+                    await _context.SaveChangesAsync();
+                } catch (Exception) {
+                    //remover os dados á DB
+                    _context.Remove(clientes);
+                    await _context.SaveChangesAsync();
+                }
+                
+                return CreatedAtAction("GetClientes", new { id = clientes.Id }, clientes);
+
+            } else {
+
+                return BadRequest(result.Errors);
+            }
         }
 
         // DELETE: api/ClientesAPI/5

@@ -188,14 +188,14 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                         }
                     } else {
 
-                        // adicionar ao Role "Funcionario"
+                        // adicionar ao Role "Cliente"
                         await _userManager.AddToRoleAsync(user, "Cliente");
 
                         // *******************************************
-                        // adicionar os dados do Funcionario á DB
+                        // adicionar os dados do Cliente á DB
                         // *******************************************
 
-                        //atualizar os dados do objeto FUNCIONARIO
+                        //atualizar os dados do objeto CLIENTE
                         Input.Cliente.Email = Input.Email;
                         Input.Cliente.UserId = user.Id;
 

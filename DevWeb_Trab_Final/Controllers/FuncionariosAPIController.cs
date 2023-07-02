@@ -75,7 +75,7 @@ namespace DevWeb_Trab_Final.Controllers
 
         // POST: api/FuncionariosAPI
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<Funcionarios>> PostFuncionarios(Funcionarios funcionarios)
         {
             _context.Funcionarios.Add(funcionarios);
