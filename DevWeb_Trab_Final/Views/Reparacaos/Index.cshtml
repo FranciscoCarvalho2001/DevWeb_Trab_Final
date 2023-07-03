@@ -19,6 +19,14 @@
 
         <h2>Reparações do @cliente.Nome</h2>
 
+        <div class="color-container">
+            <div class="color-box"></div>
+            <span class="color-label">Concluida</span>
+            <div class="color-box" style="background-color:#cfe2ff"></div>
+            <span class="color-label">P/ Concluir</span>
+        </div>
+        
+
         <table class="table table-hover" >
             <thead>
                 <tr style="border-bottom: 1px solid #000000;border-top: 1px solid #000000;">
@@ -57,4 +65,26 @@
 
     }
 }
+<style>
+    .color-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom:5px;
+    }
+
+    .color-box {
+        width: 20px;
+        height: 20px;
+        background-color: #d1e7dd;
+        border: 1px solid black;
+        margin-right: 5px;
+    }
+
+    .color-label {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+</style>
     
