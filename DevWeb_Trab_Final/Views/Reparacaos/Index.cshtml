@@ -19,29 +19,42 @@
 
         <h2>Reparações do @cliente.Nome</h2>
 
-        <table class="table">
+        <table class="table table-hover" >
             <thead>
-                <tr>
-                    <th>Tipo</th>
-                    <th>Modelo</th>
-                    <th>Data Inicio</th>
-                    <th>Data Fim</th>
-                    <th>Nome Funcionario</th>
+                <tr style="border-bottom: 1px solid #000000;border-top: 1px solid #000000;">
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Data Inicio</th>
+                    <th scope="col">Data Fim</th>
+                    <th scope="col">Nome Funcionario</th>
 
                 </tr>
             </thead>
             <tbody>
                 @foreach (var reparacao in dispositivo) {
-                    <tr>
-                        <td>@reparacao.Dispositivo.Tipo</td>
-                        <td>@reparacao.Dispositivo.Modelo</td>
-                        <td>@reparacao.DataInicio</td>
-                        <td>@reparacao.DataFim</td>
-                        <td>@reparacao.Funcionarios.Nome</td>
-                    </tr>
+                    if (reparacao.DataFim==null) {
+                        <tr style="border-bottom: 2px solid #C0C0C0;">
+                            <th class="table-primary" scope="row">@reparacao.Dispositivo.Tipo</th>
+                            <td class="table-primary">@reparacao.Dispositivo.Modelo</td>
+                            <td class ="table-primary">@reparacao.DataInicio</td>
+                            <td class="table-primary">---------------------------</td>
+                            <td class ="table-primary">@reparacao.Funcionarios.Nome</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="border-bottom:2px solid #C0C0C0;">
+                            <th class="table-success" scope="row">@reparacao.Dispositivo.Tipo</th>
+                            <td class="table-success">@reparacao.Dispositivo.Modelo</td>
+                            <td class="table-success">@reparacao.DataInicio</td>
+                            <td class="table-success">@reparacao.DataFim</td>
+                            <td class="table-success">@reparacao.Funcionarios.Nome</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
+
     }
 }
     
