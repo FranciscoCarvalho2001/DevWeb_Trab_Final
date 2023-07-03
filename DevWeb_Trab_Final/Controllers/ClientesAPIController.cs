@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using DevWeb_Trab_Final.Data;
 using DevWeb_Trab_Final.Models;
 using Microsoft.AspNetCore.Identity;
+using DevWeb_Trab_Final.Areas.Identity.Pages.Account;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace DevWeb_Trab_Final.Controllers
 {
@@ -26,6 +31,31 @@ namespace DevWeb_Trab_Final.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+        }
+
+        // POST: api/ClientesAPI/login
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(Login login) {
+
+            var user = await _userManager.FindByEmailAsync(login.Email);
+            if (user == null) {
+                return BadRequest("Email ou Password inválido");
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, lockoutOnFailure: false);
+            if (!result.Succeeded) {
+                return BadRequest("Credenciais inválidas");
+            }
+
+            return Ok(new { Message = "Login feito!" });
+        }
+
+        // POST: api/ClientesAPI/logout
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout() {
+
+            await _signInManager.SignOutAsync();
+            return Ok(new { Message = "Logout feito!" });
         }
 
         // GET: api/ClientesAPI
