@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NuGet.Protocol;
 
 namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
 {
@@ -111,12 +112,17 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             /// <summary>
-            /// 
+            /// Referencia para a Classe Funcionarios
             /// </summary>
             public Funcionarios Funcionario { get; set; }
 
+            /// <summary>
+            /// Referencia para a Classe Clientes
+            /// </summary>
             public Clientes Cliente { get; set; }
-
+            /// <summary>
+            /// Flag para se saber se o utilizador é Administrador
+            /// </summary>
             public bool flagAdmin { get; set; }
         }
 
@@ -148,15 +154,23 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                // Regista o tempo em que foi criado o Utilizador
                 user.DataRegisto = DateTime.Now;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                // cheack para saber se é Administrador
                 if (Input.flagAdmin == true) {
+                    // iguala o nome do Funcionario ao Nome de Utilizador
                     user.NomeUtilizador = Input.Funcionario.Nome;
+                    // obtem o número de Telemovel do Funcionario
+                    user.PhoneNumber = Input.Funcionario.Telemovel;
                 } else {
+                    // iguala o nome do Cliente ao Nome de Utilizador
                     user.NomeUtilizador = Input.Cliente.Nome;
+                    // obtem o número de Telemovel do Cliente
+                    user.PhoneNumber = Input.Cliente.Telemovel;
                 }
 
                 // efetiva criação do USER
@@ -167,6 +181,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // cheack para saber se é Administrador
                     if (Input.flagAdmin == true) {
 
                         // adicionar ao Role "Funcionario"
@@ -191,14 +206,14 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                         }
                     } else {
 
-                        // adicionar ao Role "Funcionario"
+                        // adicionar ao Role "Cliente"
                         await _userManager.AddToRoleAsync(user, "Cliente");
 
                         // *******************************************
-                        // adicionar os dados do Funcionario á DB
+                        // adicionar os dados do Cliente á DB
                         // *******************************************
 
-                        //atualizar os dados do objeto FUNCIONARIO
+                        //atualizar os dados do objeto Cliente
                         Input.Cliente.Email = Input.Email;
                         Input.Cliente.UserId = user.Id;
 

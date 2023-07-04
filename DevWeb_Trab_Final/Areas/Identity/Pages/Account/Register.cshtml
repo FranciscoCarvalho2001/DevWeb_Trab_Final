@@ -4,12 +4,31 @@
     ViewData["Title"] = "Registar";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2>Criar um novo utilizador.</h2>
+<style>
+    
+    .register-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        height: 100vh;
+        padding-top: 20px;
+    }
 
-<div class="row">
+    .brand {
+        font-family: 'Nabla', cursive;
+    }
+
+    .smaller-image {
+        width: 45%;
+    }
+
+</style>
+
+<div class="register-container">
     <div class="col-md-4" >
 
+        <h1>@ViewData["Title"]</h1>
+        <h2>Criar um novo utilizador.</h2>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
             @if (User.IsInRole("Administrador")) {
@@ -125,16 +144,7 @@
         <div><img src="~/imagens/reparatech.png" alt="..." class="img-fluid" style="background-color: transparent;" alt="Responsive image"></div>
     </div>
 </div>
-<style>
-    .brand {
-        font-family: 'Nabla', cursive;
-    }
 
-    .smaller-image {
-        width: 45%;
-    }
-
-</style>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
