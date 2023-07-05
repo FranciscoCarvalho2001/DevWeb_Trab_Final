@@ -1,15 +1,34 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registar";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2>Criar um novo utilizador.</h2>
+<style>
+    
+    .register-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        height: 100vh;
+        padding-top: 20px;
+    }
 
-<div class="row">
-    <div class="col-md-4">
+    .brand {
+        font-family: 'Nabla', cursive;
+    }
 
+    .smaller-image {
+        width: 45%;
+    }
+
+</style>
+
+<div class="register-container">
+    <div class="col-md-4" >
+
+        <h1>@ViewData["Title"]</h1>
+        <h2>Criar um novo utilizador.</h2>
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
             @if (User.IsInRole("Administrador")) {
@@ -22,7 +41,7 @@
             }
             
             <div class="row">
-                <div class"col-md-6">
+                <div class"col-6 col-md-4">
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
@@ -40,14 +59,14 @@
 
                     <div class="form-floating mb-3">
                         <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                        <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                        <label asp-for="Input.ConfirmPassword">Confirmar Password</label>
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
 
                 @if (User.IsInRole("Administrador"))
                 {
-                    <div class"col-md-6">
+                    <div class"col-6 col-md-4">
 
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Funcionario.Nome" class="form-control" />
@@ -83,7 +102,7 @@
                 }
                 @if (User.IsInRole("Funcionario") || !User.Identity.IsAuthenticated)
                 {
-                    <div class"col-md-6">
+                    <div class"col-6 col-md-4">
 
                         <div class="form-floating mb-3">
                             <input asp-for="Input.Cliente.Nome" class="form-control" />
@@ -120,35 +139,9 @@
             </div>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
+    <div class="col-12 col-md-8 text-center  smaller-image">
+        <h1 class="brand display-1">ReparaTECH</h1>
+        <div><img src="~/imagens/reparatech.png" alt="..." class="img-fluid" style="background-color: transparent;" alt="Responsive image"></div>
     </div>
 </div>
 

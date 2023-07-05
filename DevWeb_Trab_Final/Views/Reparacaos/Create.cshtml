@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Criar Reparação</h1>
 
-<h4>Reparacao</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,11 +15,6 @@
                 <label asp-for="DataInicio" class="control-label"></label>
                 <input asp-for="DataInicio" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataFim" class="control-label"></label>
-                <input asp-for="DataFim" class="form-control" />
-                <span asp-validation-for="DataFim" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CustoAux" class="control-label"></label>
@@ -41,14 +35,14 @@
                 <select asp-for="FuncionariosFK" class ="form-control" asp-items="ViewBag.FuncionariosFK"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Funcionarios" asp-action="Administrador">Voltar á lista</a>
 </div>
 
 @section Scripts {

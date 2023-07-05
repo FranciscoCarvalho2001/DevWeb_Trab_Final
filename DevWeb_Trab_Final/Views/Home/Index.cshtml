@@ -1,35 +1,91 @@
-﻿@{
+﻿@model IEnumerable<DevWeb_Trab_Final.Models.Funcionarios>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<style>
+    
+
+    .custom-container {
+        display: flex;
+        justify-content: space-around;
+        height: 100vh;
+    }
+
+    .custom-column {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .corpo {
+        display: table;
+    }
+
+    .introd {
+        font-family: 'Montserrat', sans-serif;
+        font-weight:500 bold 600;
+    }
+
+    .corpo h1 {
+            font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    .home-txt {
+        padding-top: 20px;
+    }
+
+    .introd {
+        font-family: 'Montserrat', sans-serif, bold;
+    }
+
+</style>
 
 <div class="container custom-container">
     <div class="row">
         <div class="col custom-column">
-            <!-- Conteúdo da primeira coluna -->
+            <div class="corpo">
+                <h1 class="text-dark">Serviço de Reparação de Dispositivos Eletrónicos</h1>
+            </div>
+            
+            <div class="home-txt">
+                <p class="introd">
+                    Bem-vindo a ReparaTECH! A sua referência confiável para reparação dos vossos diversos Dispositivos Eletrónicos! Contamos com uma equipa de técnicos altamente qualificados e experientes, prontos para ajudar em todas as situações.
+                </p>
+                <p class="introd" >Os nossos técnicos são especialistas nas suas áreas, com habilidades únicas e conhecimentos especializados em diversos tipos de disposistivos. Independentemente do problema com a sua máquina de lavar roupa, Portátil, fogão, Telemóvel, micro-ondas ou outro aparelho, oferecemos soluções eficientes e de qualidade!</p>
+                
+                @if (!User.Identity.IsAuthenticated) {
+                    <p class="introd" >Se precisa de reparar um Dispositivo e é novo no nosso site:<br/>
+                        <a class="introd" asp-area="Identity" asp-page="/Account/Register"><b>Clique Aqui para se Registar!</b></a>
+                    </p>
+                
+                    <p>Se já encontra Registado na nossa Loja:<br/>
+                        <a class="introd" asp-area="Identity" asp-page="/Account/Login"><b>Clique Aqui para Entrar!</b></a>
+                        <br/>
+                    </p>
+                }
+                
+            </div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingClientes">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="true" aria-controls="collapseClientes">Prestamos serviços relacionados a ...</button>
+                    </h2>
+                    <div id="collapseClientes" class="accordion-collapse collapse show" aria-labelledby="headingClientes" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                @foreach (var especializacao in Model.Select(f => f.Especializacao).Distinct())
+                                {
+                                    <li>@especializacao</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col custom-column1">
-            <img src="~/imagens/reparatech.jpg" alt="..." class="img-fluid" alt="Responsive image">
+            <img src="~/imagens/reparatech.png" alt="..." class="img-fluid" alt="Responsive image">
         </div>
     </div>
 </div>
-
-<style>
-    .custom-container {
-        width: 1200px;
-        margin-right: 0;
-        margin-left: 0;
-        padding-right: 0;
-        padding-left: 0;
-    }
-
-    .custom-column {
-        background-color: #69D7FF;
-        padding-right: 0;
-        padding-left: 0;
-    }
-    .custom-column{
-        background-color: #69D7FF;
-        padding-right: 0;
-        padding-left: 0;
-    }
-</style>

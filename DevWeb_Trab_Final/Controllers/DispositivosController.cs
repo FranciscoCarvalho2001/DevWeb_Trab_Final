@@ -28,7 +28,10 @@ namespace DevWeb_Trab_Final.Controllers
         // GET: Dispositivos
         public async Task<IActionResult> Index()
         {
-            var devWeb_Trab_FinalContext = _context.Dispositivos.Include(d => d.Cliente);
+            var devWeb_Trab_FinalContext = _context.Dispositivos
+                .Include(d => d.Cliente)
+                .Include(l => l.ListaReparacao)
+                .Include(f => f.ListaFotografias);
             return View(await devWeb_Trab_FinalContext.ToListAsync());
         }
 
@@ -129,7 +132,7 @@ namespace DevWeb_Trab_Final.Controllers
                         await imagemDispositivo.CopyToAsync(stream);
                     }
                     // devolver o controlo da app para a página do início
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Administrador", "Funcionarios");
                 } catch (Exception) {
                     ModelState.AddModelError("", "Ocurreu um erro com a adição dos dados do seu Dispositivo");
                     // trow;
@@ -186,7 +189,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
             }
             ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
             return View(dispositivos);
@@ -227,7 +230,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Administrador", "Funcionarios");
         }
 
         private bool DispositivosExists(int id)

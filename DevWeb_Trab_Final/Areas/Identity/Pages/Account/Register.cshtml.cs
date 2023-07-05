@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NuGet.Protocol;
 
 namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
 {
@@ -83,17 +84,19 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            
+            [EmailAddress(ErrorMessage = "O {0} não está escrito corretamente")]
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
+            [RegularExpression("[a-z._0-9]+@+[a-z]+.com")]
+            [StringLength(40)]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
+            [StringLength(100, ErrorMessage = "A {0} precisa de ter no mínimo entre {2} e no máximo {1} caractéres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -102,18 +105,24 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "O {0} é de preenchimento obrigatório")]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar Password")]
+            [Compare("Password", ErrorMessage = "A Nova Password e a Confirmação Password não são iguais.")]
             public string ConfirmPassword { get; set; }
 
             /// <summary>
-            /// 
+            /// Referencia para a Classe Funcionarios
             /// </summary>
             public Funcionarios Funcionario { get; set; }
 
+            /// <summary>
+            /// Referencia para a Classe Clientes
+            /// </summary>
             public Clientes Cliente { get; set; }
-
+            /// <summary>
+            /// Flag para se saber se o utilizador é Administrador
+            /// </summary>
             public bool flagAdmin { get; set; }
         }
 
@@ -145,15 +154,23 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                // Regista o tempo em que foi criado o Utilizador
                 user.DataRegisto = DateTime.Now;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
+                // cheack para saber se é Administrador
                 if (Input.flagAdmin == true) {
+                    // iguala o nome do Funcionario ao Nome de Utilizador
                     user.NomeUtilizador = Input.Funcionario.Nome;
+                    // obtem o número de Telemovel do Funcionario
+                    user.PhoneNumber = Input.Funcionario.Telemovel;
                 } else {
+                    // iguala o nome do Cliente ao Nome de Utilizador
                     user.NomeUtilizador = Input.Cliente.Nome;
+                    // obtem o número de Telemovel do Cliente
+                    user.PhoneNumber = Input.Cliente.Telemovel;
                 }
 
                 // efetiva criação do USER
@@ -164,6 +181,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // cheack para saber se é Administrador
                     if (Input.flagAdmin == true) {
 
                         // adicionar ao Role "Funcionario"
@@ -195,7 +213,7 @@ namespace DevWeb_Trab_Final.Areas.Identity.Pages.Account
                         // adicionar os dados do Cliente á DB
                         // *******************************************
 
-                        //atualizar os dados do objeto CLIENTE
+                        //atualizar os dados do objeto Cliente
                         Input.Cliente.Email = Input.Email;
                         Input.Cliente.UserId = user.Id;
 
