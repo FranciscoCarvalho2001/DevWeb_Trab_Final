@@ -37,26 +37,40 @@ namespace DevWeb_Trab_Final.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(Login login) {
 
+            // check para ver se o user existe na DB
             var user = await _userManager.FindByEmailAsync(login.Email);
+            // se falhar...
             if (user == null) {
+                // retorna Erro
                 return BadRequest("Email ou Password inválido");
             }
 
+            // tenta fazer sign in com as credenciais submetidas e retorna um objeto com o resultado da operação
             var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, lockoutOnFailure: false);
+            // se falhar...
             if (!result.Succeeded) {
+                // retorna Erro
                 return BadRequest("Credenciais inválidas");
             }
 
-            return Ok(new { Message = "Login feito!" });
+            // obtem o ID do Cliente associado ao Email
+            var cliente = await _context.Clientes.FirstOrDefaultAsync(i => i.UserId == user.Id);
+
+            // retorna o ID do cliente
+            return Ok(new { ClienteId = cliente.Id });
         }
 
         // POST: api/ClientesAPI/logout
         [HttpPost("logout")]
         public async Task<IActionResult> Logout() {
 
+            // faz sign out do user logado na aplicação
             await _signInManager.SignOutAsync();
+            // retorna uma mensagem
             return Ok(new { Message = "Logout feito!" });
         }
+
+        // -------------------------------------------------------------------------------------------------------------------
 
         // GET: api/ClientesAPI
         [HttpGet]
@@ -115,21 +129,27 @@ namespace DevWeb_Trab_Final.Controllers
         [HttpPost("create")]
         public async Task<ActionResult<Clientes>> PostClientes(Clientes clientes)
         {
+            // cria um User, com as devidas informações fornecidas do Cliente
             var user = new DevWeb_Trab_Final_User {
                 UserName = clientes.Email,
                 Email = clientes.Email,
                 NomeUtilizador = clientes.Nome,
+                PhoneNumber = clientes.Telemovel,
                 EmailConfirmed = true,
                 DataRegisto = DateTime.Now
             };
 
+            // obtem a password do User fornecida pelo o URL recebido
             string password = Request.Query["password"];
 
+            // Cria o User na DB
             var result = await _userManager.CreateAsync(user, password);
 
+            // se o User foi criado com sucesso...
             if(result.Succeeded) {
+                // adiciona ao role "Cliente" da DB
                 await _userManager.AddToRoleAsync(user, "Cliente");
-
+                // ligação entre a DB do negócio e a DB de autenticação
                 clientes.UserId = user.Id;
 
                 try {
@@ -142,10 +162,11 @@ namespace DevWeb_Trab_Final.Controllers
                     await _context.SaveChangesAsync();
                 }
                 
+                // retorna um objeto com o resultado da operação
                 return CreatedAtAction("GetClientes", new { id = clientes.Id }, clientes);
 
             } else {
-
+                // se não, retorna Erro
                 return BadRequest(result.Errors);
             }
         }
