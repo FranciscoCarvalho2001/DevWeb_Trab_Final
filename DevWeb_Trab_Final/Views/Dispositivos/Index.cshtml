@@ -3,57 +3,46 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataReg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modelo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataReg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modelo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Email)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@{
+    var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Cliente.Email))?.Cliente;
 }
-    </tbody>
-</table>
+
+@if (User.IsInRole("Cliente"))
+{
+    @if (cliente != null)
+    {
+        <h2>Dispositivos de @cliente.Nome</h2><br />
+        <div class="row">
+            @foreach (var dispositivo in cliente.ListaDipositivos)
+            {
+                <div class="col-md-4 col-lg-4 col-xl-4 mb-4">
+                    <div class="card bg-light mb-3" style="width: 18rem;">
+                        @foreach (var foto in dispositivo.ListaFotografias)
+                        {
+                            <center><img src="~/imagens/@foto.NomeFoto" alt="Fotografia do Dispositivo @foto.NomeFoto" title="@dispositivo.Modelo" class="img-thumbnail img-fluid"></center>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">Estado</h5>
+                            <p class="card-text">@dispositivo.Estado</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@dispositivo.Tipo</li>
+                            <li class="list-group-item">@dispositivo.Modelo</li>
+                            <li class="list-group-item">@dispositivo.DataReg</li>
+                        </ul>
+                        <div class="card-body">
+                            <a asp-action="Details" asp-route-id="@dispositivo.Id">Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            }
+           
+        </div>
+    }
+    else
+    {
+        <h2>Não existe nenhum dispositivo registado</h2>
+    }
+
+
+}

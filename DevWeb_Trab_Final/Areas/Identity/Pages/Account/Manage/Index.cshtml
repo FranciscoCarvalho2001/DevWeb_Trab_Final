@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>Perfil</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+
+        @if (User.IsInRole("Cliente")) {
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Cliente.Nome" class="form-control" placeholder="Por favor escolha o seu nome de utilizador." disabled />
+                    <label asp-for="Cliente.Nome" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Cliente.Telemovel" class="form-control" placeholder="Telemovel" disabled />
+                    <label asp-for="Cliente.Telemovel" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Por favor insira número de telemóvel." />
+                    <label asp-for="Input.PhoneNumber" class="form-label">Telemóvel</label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Cliente.Morada" class="form-control" placeholder="Morada" disabled />
+                    <label asp-for="Cliente.Morada" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Morada" class="form-control" placeholder="Por favor insira a sua Morada." />
+                    <label asp-for="Input.Morada" class="form-label">Morada</label>
+                    <span asp-validation-for="Input.Morada" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Cliente.CodPostal" class="form-control" placeholder="Código Postl" disabled />
+                    <label asp-for="Cliente.CodPostal" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.CodPostal" class="form-control" placeholder="Por favor insira o seu Código Postal"/>
+                    <label asp-for="Input.CodPostal" class="form-label">Código Postal</label>
+                    <span asp-validation-for="Input.CodPostal" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Cliente.NIF" class="form-control" placeholder="Número Identificação Fiscal" disabled />
+                    <label asp-for="Cliente.NIF" class="form-label"></label>
+                </div>
+                <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Guardar</button>
+            </form>
+        }
+        @if (User.IsInRole("Funcionario")){
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Funcionario.Nome" class="form-control" placeholder="Por favor escolha o seu nome de utilizador." disabled />
+                    <label asp-for="Funcionario.Nome" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Funcionario.Telemovel" class="form-control" placeholder="Telemovel" disabled />
+                    <label asp-for="Funcionario.Telemovel" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Por favor insira número de telemóvel." />
+                    <label asp-for="Input.PhoneNumber" class="form-label">Telemóvel</label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Funcionario.Morada" class="form-control" placeholder="Morada" disabled />
+                    <label asp-for="Funcionario.Morada" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Morada" class="form-control" placeholder="Por favor insira a sua Morada." />
+                    <label asp-for="Input.Morada" class="form-label">Morada</label>
+                    <span asp-validation-for="Input.Morada" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Funcionario.CodPostal" class="form-control" placeholder="Código Postal" disabled />
+                    <label asp-for="Funcionario.CodPostal" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.CodPostal" class="form-control" placeholder="Por favor insira o seu Código Postal" />
+                    <label asp-for="Input.CodPostal" class="form-label">Código Postal</label>
+                    <span asp-validation-for="Input.CodPostal" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Funcionario.Especializacao" class="form-control" placeholder="Especialização" disabled />
+                    <label asp-for="Funcionario.Especializacao" class="form-label"></label>
+                </div>
+                <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Guardar</button>
+            </form>
+        }
+        @if (User.IsInRole("Administrador")) {
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Username" class="form-control" placeholder="Por favor escolha o seu nome de utilizador." disabled />
+                    <label asp-for="Username" class="form-label">Nome de Utilizador</label>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -3,63 +3,97 @@
 @{
     ViewData["Title"] = "Index";
 }
+@{
+    var cliente = Model.FirstOrDefault(c => User.Identity.Name.Equals(c.Dispositivo.Cliente.Email))?.Dispositivo.Cliente;
 
-<h1>Index</h1>
+    var dispositivo = Model.Where(d => d.Dispositivo.Cliente.Email == cliente.Email);
+    //var dispositivo = Model.FirstOrDefault(d => d.Dispositivo.Id.Equals(d.DispositivoFK))?.Dispositivo;
+    //var cliente = Model.FirstOrDefault(c => c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.ClienteFK;
+    //var cliente = Model.FirstOrDefault(c => c.Dispositivo != null && c.Dispositivo.Cliente != null && c.Dispositivo.Cliente.Id.Equals(c.Dispositivo.ClienteFK))?.Dispositivo.Cliente;
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Custo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dispositivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Funcionarios)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Custo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dispositivo.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Funcionarios.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
 }
-    </tbody>
-</table>
+
+@if (User.IsInRole("Cliente")) {
+    try{
+        @if (cliente != null && cliente.Email != null)
+        {
+            <h2>Reparações do @cliente.Nome</h2>
+
+            <div class="color-container">
+                <div class="color-box"></div>
+                <span class="color-label">Concluida</span>
+                <div class="color-box" style="background-color:#cfe2ff"></div>
+                <span class="color-label">P/ Concluir</span>
+            </div>
+        
+
+            <table class="table table-hover" >
+                <thead>
+                    <tr style="border-bottom: 1px solid #000000;border-top: 1px solid #000000;">
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Data Inicio</th>
+                        <th scope="col">Data Fim</th>
+                        <th scope="col">Nome Funcionario</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reparacao in dispositivo) {
+                        if (reparacao.DataFim==null) {
+                            <tr style="border-bottom: 2px solid #C0C0C0;">
+                                <th class="table-primary" scope="row">@reparacao.Dispositivo.Tipo</th>
+                                <td class="table-primary">@reparacao.Dispositivo.Modelo</td>
+                                <td class ="table-primary">@reparacao.DataInicio</td>
+                                <td class="table-primary">---------------------------</td>
+                                <td class ="table-primary">@reparacao.Funcionarios.Nome</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style="border-bottom:2px solid #C0C0C0;">
+                                <th class="table-success" scope="row">@reparacao.Dispositivo.Tipo</th>
+                                <td class="table-success">@reparacao.Dispositivo.Modelo</td>
+                                <td class="table-success">@reparacao.DataInicio</td>
+                                <td class="table-success">@reparacao.DataFim</td>
+                                <td class="table-success">@reparacao.Funcionarios.Nome</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h2>Não existe nenhuma reparação a ocorrer </h2>
+        }
+
+}
+    catch (Exception)
+    {
+        <h1>Nada</h1>
+    }
+}
+<style>
+    .color-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom:5px;
+    }
+
+    .color-box {
+        width: 20px;
+        height: 20px;
+        background-color: #d1e7dd;
+        border: 1px solid black;
+        margin-right: 5px;
+    }
+
+    .color-label {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+</style>
+    

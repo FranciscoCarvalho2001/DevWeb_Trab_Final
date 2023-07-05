@@ -113,7 +113,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Administrador", "Funcionarios");
             }
             return View(clientes);
         }
@@ -152,7 +152,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Administrador", "Funcionarios");
         }
 
         private bool ClientesExists(int id)
