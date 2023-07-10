@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230709191714_InserirUtilizadores")]
+    partial class InserirUtilizadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "a1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "defaa072-55ae-4469-abd6-a3edc1449072",
+                            ConcurrencyStamp = "73fb5ff9-98ad-4e2c-ac03-dde010ca7960",
                             DataRegisto = new DateTime(2023, 1, 1, 9, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "administrador_1@gmail.com",
                             EmailConfirmed = true,
@@ -105,9 +108,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Administrador UM",
                             NormalizedEmail = "ADMINISTRADOR_1@GMAIL.COM",
                             NormalizedUserName = "ADMINISTRADOR_1@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b78d352d-7344-4826-b37e-d7516096e553",
+                            SecurityStamp = "5338480d-7100-479b-9a43-b985d5607f27",
                             TwoFactorEnabled = false,
                             UserName = "administrador_1@gmail.com"
                         },
@@ -115,7 +118,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "a2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6599ef3-172c-41c7-abb0-98072a154fc7",
+                            ConcurrencyStamp = "e4ea16e5-f4b1-4624-a271-4c24f909bf5f",
                             DataRegisto = new DateTime(2023, 1, 1, 9, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "administrador_2@gmail.com",
                             EmailConfirmed = true,
@@ -123,9 +126,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Administrador DOIS",
                             NormalizedEmail = "ADMINISTRADOR_2@GMAIL.COM",
                             NormalizedUserName = "ADMINISTRADOR_2@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c41c3ea7-3de1-475d-8e08-a766e813b837",
+                            SecurityStamp = "47ad0da2-65c2-45c6-828a-0d44f259c3d9",
                             TwoFactorEnabled = false,
                             UserName = "administrador_2@gmail.com"
                         },
@@ -133,7 +136,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "f1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4be2b8b8-5007-4b21-a0bb-14e10ce98099",
+                            ConcurrencyStamp = "27f4ca81-822e-440d-b7a8-4e8e2757b981",
                             DataRegisto = new DateTime(2023, 1, 20, 11, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "daniel@gmail.com",
                             EmailConfirmed = true,
@@ -141,10 +144,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Daniel Filipe",
                             NormalizedEmail = "DANIEL@GMAIL.COM",
                             NormalizedUserName = "DANIEL@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "912123123",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f358514-896a-4544-9da5-afd44f501cb2",
+                            SecurityStamp = "74ecf326-a044-4099-b6d6-ae52cc3d64d0",
                             TwoFactorEnabled = false,
                             UserName = "daniel@gmail.com"
                         },
@@ -152,7 +154,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "f2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7648c2b1-304c-4baa-8c99-8e084bc2cc0c",
+                            ConcurrencyStamp = "8fe002cf-28a9-4fc9-9b4a-72e2fdce7ecd",
                             DataRegisto = new DateTime(2023, 1, 15, 14, 20, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "rodrigo@gmail.com",
                             EmailConfirmed = true,
@@ -160,10 +162,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Rodrigo Antunes",
                             NormalizedEmail = "RODRIGO@GMAIL.COM",
                             NormalizedUserName = "RODRIGO@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "915789789",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5d3a3bb8-ee17-4b77-b060-8b8a4ecb8444",
+                            SecurityStamp = "00c8fdc8-eb46-4ba7-a98c-8d5ec8c33a7b",
                             TwoFactorEnabled = false,
                             UserName = "rodrigo@gmail.com"
                         },
@@ -171,7 +172,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "f3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c032d3f3-4b09-4bc6-9d31-7d2bfc3979e4",
+                            ConcurrencyStamp = "caa30bbf-6f4b-4019-9a37-67527cca2925",
                             DataRegisto = new DateTime(2023, 1, 29, 16, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "leia.marques@gmail.com",
                             EmailConfirmed = true,
@@ -179,10 +180,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Leia Marques",
                             NormalizedEmail = "LEIA.MARQUES@GMAIL.COM",
                             NormalizedUserName = "LEIA.MARQUES@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "962231123",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b682ffc1-1b00-4170-98c6-c8c72ec55807",
+                            SecurityStamp = "6338c94e-2e09-467f-a015-e4e38c2648d5",
                             TwoFactorEnabled = false,
                             UserName = "leia.marques@gmail.com"
                         },
@@ -190,7 +190,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "f4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "42f5964a-446d-49cd-b402-03664b4081d5",
+                            ConcurrencyStamp = "0fb44d03-d84b-4282-8e7f-ea7e520d2aaa",
                             DataRegisto = new DateTime(2023, 2, 2, 12, 15, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "carlos@gmail.com",
                             EmailConfirmed = true,
@@ -198,10 +198,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Carlos Tomaz",
                             NormalizedEmail = "CARLOS@GMAIL.COM",
                             NormalizedUserName = "CARLOS@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "932553923",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "569cf23b-ce85-41f9-ac1e-79a26d23cff8",
+                            SecurityStamp = "963635cd-9889-4f7e-8c20-5b41b97edc12",
                             TwoFactorEnabled = false,
                             UserName = "carlos@gmail.com"
                         },
@@ -209,7 +208,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "f5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "39be2b4a-685f-42e9-95e5-c8bf1e048ce7",
+                            ConcurrencyStamp = "0f8734c7-5fa4-42a8-8373-51e3a6945925",
                             DataRegisto = new DateTime(2023, 2, 18, 11, 50, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "tiago_varandas@gmail.com",
                             EmailConfirmed = true,
@@ -217,10 +216,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Tiago Roberto Varandas",
                             NormalizedEmail = "TIAGO_VARANDAS@GMAIL.COM",
                             NormalizedUserName = "TIAGO_VARANDAS@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "922456123",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1d32542-5de4-4d6b-b622-c46479ad03da",
+                            SecurityStamp = "d5df9c2e-e2c7-4986-91f5-c38a7cc242e4",
                             TwoFactorEnabled = false,
                             UserName = "tiago_varandas@gmail.com"
                         },
@@ -228,7 +226,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "c1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72c4ef58-65f2-41f0-970d-b549564447ca",
+                            ConcurrencyStamp = "68a1f2be-4459-4ef3-bf7b-03c2456d8ce6",
                             DataRegisto = new DateTime(2023, 2, 13, 14, 10, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "alberto@hotmail.com",
                             EmailConfirmed = true,
@@ -236,10 +234,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Alberto Santos",
                             NormalizedEmail = "ALBERTO@HOTMAIL.COM",
                             NormalizedUserName = "ALBERTO@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "969777666",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8314899-0afc-4289-8677-ca3798c30543",
+                            SecurityStamp = "4910fbb9-9c0d-4283-90c4-70243b5d5628",
                             TwoFactorEnabled = false,
                             UserName = "alberto@hotmail.com"
                         },
@@ -247,7 +244,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "c2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c7e0ff0-3fa6-4fff-988c-0339c69d9412",
+                            ConcurrencyStamp = "22343c87-6f9a-464d-a61d-fa17bcf580c6",
                             DataRegisto = new DateTime(2023, 5, 9, 17, 59, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "maria.joao@hotmail.com",
                             EmailConfirmed = true,
@@ -255,10 +252,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Maria João",
                             NormalizedEmail = "MARIA.JOAO@HOTMAIL.COM",
                             NormalizedUserName = "MARIA.JOAO@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "933751916",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01fa1f1a-c62e-4ffb-8d79-0df481c16b96",
+                            SecurityStamp = "7eb6a2ee-30f5-4fa9-8f27-296d9cc799cb",
                             TwoFactorEnabled = false,
                             UserName = "maria.joao@hotmail.com"
                         },
@@ -266,7 +262,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "c3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "12fb0a08-b963-40f8-a74c-33ca8d535f36",
+                            ConcurrencyStamp = "3ddb906a-0146-407c-ab20-fbe62c07be24",
                             DataRegisto = new DateTime(2023, 6, 23, 12, 40, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "catarina@hotmail.com",
                             EmailConfirmed = true,
@@ -274,10 +270,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Catarina Moedas",
                             NormalizedEmail = "CATARINA@HOTMAIL.COM",
                             NormalizedUserName = "CATARINA@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "919744531",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "785aacae-a247-4bd6-a87d-4a605eac16c5",
+                            SecurityStamp = "71220dd4-1692-453e-9f27-b98488b79bc8",
                             TwoFactorEnabled = false,
                             UserName = "catarina@hotmail.com"
                         },
@@ -285,7 +280,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = "c4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9433725-7316-430d-bff8-304a6a53d519",
+                            ConcurrencyStamp = "45db5786-8815-412a-94f5-42cd05a7b851",
                             DataRegisto = new DateTime(2023, 3, 30, 9, 30, 0, 435, DateTimeKind.Local).AddTicks(8516),
                             Email = "gustavo_pal@hotmail.com",
                             EmailConfirmed = true,
@@ -293,10 +288,9 @@ namespace DevWeb_Trab_Final.Migrations
                             NomeUtilizador = "Gustavo Palhinha",
                             NormalizedEmail = "GUSTAVO_PAL@HOTMAIL.COM",
                             NormalizedUserName = "GUSTAVO_PAL@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "923321348",
+                            PasswordHash = "AQAAAAIAAYagAAAAELNkMdIrt7kMwhD7j07xYCyWPKlgaLBmuKVAPhMoirTkdtlHghML183wzI5u6NWEJQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f9187d2-36af-43b6-9d86-5412b33bf26c",
+                            SecurityStamp = "c2010eea-80c6-4f6f-95aa-c1600a0566e1",
                             TwoFactorEnabled = false,
                             UserName = "gustavo_pal@hotmail.com"
                         });
@@ -444,7 +438,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 3,
                             ClienteFK = 2,
-                            DataReg = new DateTime(2023, 7, 10, 15, 50, 45, 32, DateTimeKind.Local).AddTicks(7445),
+                            DataReg = new DateTime(2023, 7, 9, 20, 17, 13, 785, DateTimeKind.Local).AddTicks(4577),
                             Estado = "Não faz chamadas",
                             Modelo = "Xiaomi",
                             Tipo = "Telemovel-Maria"
@@ -530,13 +524,13 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 4,
                             DispositivoFK = 4,
-                            NomeFoto = "ipad.png"
+                            NomeFoto = "noDispositivo.png"
                         },
                         new
                         {
                             Id = 5,
                             DispositivoFK = 5,
-                            NomeFoto = "relogio.png"
+                            NomeFoto = "noDispositivo.png"
                         },
                         new
                         {
@@ -548,7 +542,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 7,
                             DispositivoFK = 7,
-                            NomeFoto = "ventoinha.png"
+                            NomeFoto = "noDispositivo.png"
                         });
                 });
 
@@ -691,7 +685,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 1,
                             Custo = 80.35m,
-                            DataInicio = new DateTime(2023, 7, 10, 15, 50, 45, 32, DateTimeKind.Local).AddTicks(7559),
+                            DataInicio = new DateTime(2023, 7, 9, 20, 17, 13, 785, DateTimeKind.Local).AddTicks(4691),
                             DispositivoFK = 1,
                             FuncionariosFK = 1,
                             Observacao = "É preciso comprar um ecrã novo"
@@ -718,7 +712,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 4,
                             Custo = 10.67m,
-                            DataInicio = new DateTime(2023, 7, 10, 15, 50, 45, 33, DateTimeKind.Local).AddTicks(8),
+                            DataInicio = new DateTime(2023, 7, 9, 20, 17, 13, 785, DateTimeKind.Local).AddTicks(4706),
                             DispositivoFK = 3,
                             FuncionariosFK = 4,
                             Observacao = "É preciso mudar a antena"
@@ -773,7 +767,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 10,
                             Custo = 20.30m,
-                            DataFim = new DateTime(2023, 7, 10, 15, 50, 45, 33, DateTimeKind.Local).AddTicks(24),
+                            DataFim = new DateTime(2023, 7, 9, 20, 17, 13, 785, DateTimeKind.Local).AddTicks(4722),
                             DataInicio = new DateTime(2023, 7, 12, 14, 25, 20, 435, DateTimeKind.Local).AddTicks(8516),
                             DispositivoFK = 3,
                             FuncionariosFK = 5,
