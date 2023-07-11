@@ -20,6 +20,7 @@
 
 
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario")){
+        @*Cliente*@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingClientes">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClientes" aria-expanded="false" aria-controls="collapseClientes">Clientes</button>
@@ -54,9 +55,6 @@
                                     @Html.DisplayNameFor(model => model.Clientes.First().Telemovel)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Clientes.First().UserId)
-                                </th>
-                                <th>
                                     Opções
                                 </th>
                             </tr>
@@ -84,9 +82,6 @@
                                         @Html.DisplayFor(modelItem => item.Telemovel)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.UserId)
-                                    </td>
-                                    <td>
                                         <a asp-controller="Clientes" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                                         <a asp-controller="Clientes" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
                                         <a asp-controller="Clientes" asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
@@ -101,6 +96,7 @@
 }
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario"))
     {
+        @*Reparação*@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingReparacoes">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReparacoes" aria-expanded="false" aria-controls="collapseReparacoes">Reparações</button>
@@ -118,7 +114,7 @@
                                     @Html.DisplayNameFor(model => model.Reparacao.First().DataInicio)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Reparacao.First().Custo)
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Custo)/€
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Reparacao.First().Observacao)
@@ -145,7 +141,7 @@
                                         @Html.DisplayFor(modelItem => item.DataInicio)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Custo)
+                                        @Html.DisplayFor(modelItem => item.Custo)€
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Observacao)
@@ -177,7 +173,7 @@
                                     @Html.DisplayNameFor(model => model.Reparacao.First().DataFim)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Reparacao.First().Custo)
+                                    @Html.DisplayNameFor(model => model.Reparacao.First().Custo)/€
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Reparacao.First().Observacao)
@@ -207,7 +203,7 @@
                                             @Html.DisplayFor(modelItem => item.DataFim)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Custo)
+                                            @Html.DisplayFor(modelItem => item.Custo)€
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Observacao)
@@ -234,6 +230,7 @@
     }
     @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario"))
     {
+        @*Dispositivos*@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingDispositivos">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDispositivos" aria-expanded="false" aria-controls="collapseDispositivos">Dispositivos</button>
@@ -357,17 +354,20 @@
             </div>
         </div>
     }
-    @if (User.IsInRole("Administrador") )
+    @if (User.IsInRole("Administrador") || User.IsInRole("Funcionario")) 
     {
+        @*Funcionario*@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingFuncionarios">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFuncionarios" aria-expanded="false" aria-controls="collapseFuncionarios">Funcionarios</button>
             </h2>
             <div id="collapseFuncionarios" class="accordion-collapse collapse" aria-labelledby="headingFuncionarios" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>
-                        <a asp-area="Identity" asp-page="/Account/Register">Registar novo Funcionario</a>
-                    </p>
+                    @if (User.IsInRole("Administrador")) {
+                        <p>
+                            <a asp-area="Identity" asp-page="/Account/Register">Registar novo Funcionario</a>
+                        </p>
+                    }
                     <table class="table">
                         <thead>
                             <tr>
@@ -389,9 +389,12 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Funcionarios.First().Especializacao)
                                 </th>
-                                <th>
-                                    Opções
-                                </th>
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    <th>
+                                        Opções
+                                    </th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -416,11 +419,13 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Especializacao)
                                     </td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                                        <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
-                                    </td>
+                                    @if (User.IsInRole("Administrador")) {
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

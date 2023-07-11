@@ -4,6 +4,7 @@ using DevWeb_Trab_Final.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevWeb_Trab_Final.Migrations
 {
     [DbContext(typeof(DevWeb_Trab_FinalContext))]
-    partial class DevWeb_Trab_FinalContextModelSnapshot : ModelSnapshot
+    [Migration("20230709184052_TesteInserirTabelasFinal")]
+    partial class TesteInserirTabelasFinal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,210 +98,21 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a1",
+                            Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "defaa072-55ae-4469-abd6-a3edc1449072",
-                            DataRegisto = new DateTime(2023, 1, 1, 9, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "administrador_1@gmail.com",
+                            ConcurrencyStamp = "b04f78f6-e679-4a65-bb9d-32ba115a0468",
+                            DataRegisto = new DateTime(2023, 7, 9, 19, 40, 52, 114, DateTimeKind.Local).AddTicks(6948),
+                            Email = "administrador@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            NomeUtilizador = "Administrador UM",
-                            NormalizedEmail = "ADMINISTRADOR_1@GMAIL.COM",
-                            NormalizedUserName = "ADMINISTRADOR_1@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
+                            NomeUtilizador = "Administrador",
+                            NormalizedEmail = "ADMINISTRADOR@GMAIL.COM",
+                            NormalizedUserName = "ADMINISTRADOR@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFgsQim7Bdb+j5EW7pSGvz5tehCd7KEDXoHV+5E9F7pt5hKKVlvhK++ZkOQp1fKKIg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b78d352d-7344-4826-b37e-d7516096e553",
+                            SecurityStamp = "a2f594f7-d738-48a3-8de1-8b9a6fd743ef",
                             TwoFactorEnabled = false,
-                            UserName = "administrador_1@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "a2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6599ef3-172c-41c7-abb0-98072a154fc7",
-                            DataRegisto = new DateTime(2023, 1, 1, 9, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "administrador_2@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Administrador DOIS",
-                            NormalizedEmail = "ADMINISTRADOR_2@GMAIL.COM",
-                            NormalizedUserName = "ADMINISTRADOR_2@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "c41c3ea7-3de1-475d-8e08-a766e813b837",
-                            TwoFactorEnabled = false,
-                            UserName = "administrador_2@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "f1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4be2b8b8-5007-4b21-a0bb-14e10ce98099",
-                            DataRegisto = new DateTime(2023, 1, 20, 11, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "daniel@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Daniel Filipe",
-                            NormalizedEmail = "DANIEL@GMAIL.COM",
-                            NormalizedUserName = "DANIEL@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "912123123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f358514-896a-4544-9da5-afd44f501cb2",
-                            TwoFactorEnabled = false,
-                            UserName = "daniel@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "f2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "7648c2b1-304c-4baa-8c99-8e084bc2cc0c",
-                            DataRegisto = new DateTime(2023, 1, 15, 14, 20, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "rodrigo@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Rodrigo Antunes",
-                            NormalizedEmail = "RODRIGO@GMAIL.COM",
-                            NormalizedUserName = "RODRIGO@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "915789789",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5d3a3bb8-ee17-4b77-b060-8b8a4ecb8444",
-                            TwoFactorEnabled = false,
-                            UserName = "rodrigo@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "f3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c032d3f3-4b09-4bc6-9d31-7d2bfc3979e4",
-                            DataRegisto = new DateTime(2023, 1, 29, 16, 0, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "leia.marques@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Leia Marques",
-                            NormalizedEmail = "LEIA.MARQUES@GMAIL.COM",
-                            NormalizedUserName = "LEIA.MARQUES@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "962231123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b682ffc1-1b00-4170-98c6-c8c72ec55807",
-                            TwoFactorEnabled = false,
-                            UserName = "leia.marques@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "f4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "42f5964a-446d-49cd-b402-03664b4081d5",
-                            DataRegisto = new DateTime(2023, 2, 2, 12, 15, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "carlos@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Carlos Tomaz",
-                            NormalizedEmail = "CARLOS@GMAIL.COM",
-                            NormalizedUserName = "CARLOS@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "932553923",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "569cf23b-ce85-41f9-ac1e-79a26d23cff8",
-                            TwoFactorEnabled = false,
-                            UserName = "carlos@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "f5",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "39be2b4a-685f-42e9-95e5-c8bf1e048ce7",
-                            DataRegisto = new DateTime(2023, 2, 18, 11, 50, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "tiago_varandas@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Tiago Roberto Varandas",
-                            NormalizedEmail = "TIAGO_VARANDAS@GMAIL.COM",
-                            NormalizedUserName = "TIAGO_VARANDAS@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "922456123",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "c1d32542-5de4-4d6b-b622-c46479ad03da",
-                            TwoFactorEnabled = false,
-                            UserName = "tiago_varandas@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "c1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "72c4ef58-65f2-41f0-970d-b549564447ca",
-                            DataRegisto = new DateTime(2023, 2, 13, 14, 10, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "alberto@hotmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Alberto Santos",
-                            NormalizedEmail = "ALBERTO@HOTMAIL.COM",
-                            NormalizedUserName = "ALBERTO@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "969777666",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e8314899-0afc-4289-8677-ca3798c30543",
-                            TwoFactorEnabled = false,
-                            UserName = "alberto@hotmail.com"
-                        },
-                        new
-                        {
-                            Id = "c2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c7e0ff0-3fa6-4fff-988c-0339c69d9412",
-                            DataRegisto = new DateTime(2023, 5, 9, 17, 59, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "maria.joao@hotmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Maria João",
-                            NormalizedEmail = "MARIA.JOAO@HOTMAIL.COM",
-                            NormalizedUserName = "MARIA.JOAO@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "933751916",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "01fa1f1a-c62e-4ffb-8d79-0df481c16b96",
-                            TwoFactorEnabled = false,
-                            UserName = "maria.joao@hotmail.com"
-                        },
-                        new
-                        {
-                            Id = "c3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "12fb0a08-b963-40f8-a74c-33ca8d535f36",
-                            DataRegisto = new DateTime(2023, 6, 23, 12, 40, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "catarina@hotmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Catarina Moedas",
-                            NormalizedEmail = "CATARINA@HOTMAIL.COM",
-                            NormalizedUserName = "CATARINA@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "919744531",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "785aacae-a247-4bd6-a87d-4a605eac16c5",
-                            TwoFactorEnabled = false,
-                            UserName = "catarina@hotmail.com"
-                        },
-                        new
-                        {
-                            Id = "c4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9433725-7316-430d-bff8-304a6a53d519",
-                            DataRegisto = new DateTime(2023, 3, 30, 9, 30, 0, 435, DateTimeKind.Local).AddTicks(8516),
-                            Email = "gustavo_pal@hotmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NomeUtilizador = "Gustavo Palhinha",
-                            NormalizedEmail = "GUSTAVO_PAL@HOTMAIL.COM",
-                            NormalizedUserName = "GUSTAVO_PAL@HOTMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGDOPtP55I+lMq1ehxtZ/Rpmf9hZyZcdhNz6ZpUYOlbiXbGMZyjmx73VNO3dIUE6UQ==",
-                            PhoneNumber = "923321348",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "4f9187d2-36af-43b6-9d86-5412b33bf26c",
-                            TwoFactorEnabled = false,
-                            UserName = "gustavo_pal@hotmail.com"
+                            UserName = "administrador@gmail.com"
                         });
                 });
 
@@ -352,7 +166,7 @@ namespace DevWeb_Trab_Final.Migrations
                             NIF = 249249249,
                             Nome = "Alberto Santos",
                             Telemovel = "969777666",
-                            UserId = "c1"
+                            UserId = ""
                         },
                         new
                         {
@@ -363,7 +177,7 @@ namespace DevWeb_Trab_Final.Migrations
                             NIF = 256249999,
                             Nome = "Maria João",
                             Telemovel = "933751916",
-                            UserId = "c2"
+                            UserId = ""
                         },
                         new
                         {
@@ -374,7 +188,7 @@ namespace DevWeb_Trab_Final.Migrations
                             NIF = 189234831,
                             Nome = "Catarina Moedas",
                             Telemovel = "919744531",
-                            UserId = "c3"
+                            UserId = ""
                         },
                         new
                         {
@@ -385,7 +199,7 @@ namespace DevWeb_Trab_Final.Migrations
                             NIF = 222738901,
                             Nome = "Gustavo Palhinha",
                             Telemovel = "923321348",
-                            UserId = "c4"
+                            UserId = ""
                         });
                 });
 
@@ -426,7 +240,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 1,
                             ClienteFK = 1,
-                            DataReg = new DateTime(2023, 2, 13, 14, 20, 48, 435, DateTimeKind.Local).AddTicks(8516),
+                            DataReg = new DateTime(2023, 2, 13, 14, 10, 48, 435, DateTimeKind.Local).AddTicks(8516),
                             Estado = "Ecrã Partido",
                             Modelo = "Asus",
                             Tipo = "PC-Alberto"
@@ -444,7 +258,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 3,
                             ClienteFK = 2,
-                            DataReg = new DateTime(2023, 7, 10, 15, 50, 45, 32, DateTimeKind.Local).AddTicks(7445),
+                            DataReg = new DateTime(2023, 7, 9, 19, 40, 51, 978, DateTimeKind.Local).AddTicks(4744),
                             Estado = "Não faz chamadas",
                             Modelo = "Xiaomi",
                             Tipo = "Telemovel-Maria"
@@ -530,13 +344,13 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 4,
                             DispositivoFK = 4,
-                            NomeFoto = "ipad.png"
+                            NomeFoto = "noDispositivo.png"
                         },
                         new
                         {
                             Id = 5,
                             DispositivoFK = 5,
-                            NomeFoto = "relogio.png"
+                            NomeFoto = "noDispositivo.png"
                         },
                         new
                         {
@@ -548,7 +362,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 7,
                             DispositivoFK = 7,
-                            NomeFoto = "ventoinha.png"
+                            NomeFoto = "noDispositivo.png"
                         });
                 });
 
@@ -603,7 +417,7 @@ namespace DevWeb_Trab_Final.Migrations
                             Morada = "Rua da Pedrada",
                             Nome = "Daniel Filipe",
                             Telemovel = "912123123",
-                            UserId = "f1"
+                            UserId = ""
                         },
                         new
                         {
@@ -614,7 +428,7 @@ namespace DevWeb_Trab_Final.Migrations
                             Morada = "Rua do Pinheiro",
                             Nome = "Rodrigo Antunes",
                             Telemovel = "915789789",
-                            UserId = "f2"
+                            UserId = ""
                         },
                         new
                         {
@@ -625,7 +439,7 @@ namespace DevWeb_Trab_Final.Migrations
                             Morada = "Avenida 31 de Outubro",
                             Nome = "Leia Marques",
                             Telemovel = "962231123",
-                            UserId = "f3"
+                            UserId = ""
                         },
                         new
                         {
@@ -636,7 +450,7 @@ namespace DevWeb_Trab_Final.Migrations
                             Morada = "Praça da Nogueira",
                             Nome = "Carlos Tomaz",
                             Telemovel = "932553923",
-                            UserId = "f4"
+                            UserId = ""
                         },
                         new
                         {
@@ -647,7 +461,7 @@ namespace DevWeb_Trab_Final.Migrations
                             Morada = "Praia de Lagos",
                             Nome = "Tiago Roberto Varandas",
                             Telemovel = "922456123",
-                            UserId = "f5"
+                            UserId = ""
                         });
                 });
 
@@ -691,7 +505,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 1,
                             Custo = 80.35m,
-                            DataInicio = new DateTime(2023, 7, 10, 15, 50, 45, 32, DateTimeKind.Local).AddTicks(7559),
+                            DataInicio = new DateTime(2023, 7, 9, 19, 40, 51, 978, DateTimeKind.Local).AddTicks(4898),
                             DispositivoFK = 1,
                             FuncionariosFK = 1,
                             Observacao = "É preciso comprar um ecrã novo"
@@ -718,7 +532,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 4,
                             Custo = 10.67m,
-                            DataInicio = new DateTime(2023, 7, 10, 15, 50, 45, 33, DateTimeKind.Local).AddTicks(8),
+                            DataInicio = new DateTime(2023, 7, 9, 19, 40, 51, 978, DateTimeKind.Local).AddTicks(5006),
                             DispositivoFK = 3,
                             FuncionariosFK = 4,
                             Observacao = "É preciso mudar a antena"
@@ -773,7 +587,7 @@ namespace DevWeb_Trab_Final.Migrations
                         {
                             Id = 10,
                             Custo = 20.30m,
-                            DataFim = new DateTime(2023, 7, 10, 15, 50, 45, 33, DateTimeKind.Local).AddTicks(24),
+                            DataFim = new DateTime(2023, 7, 9, 19, 40, 51, 978, DateTimeKind.Local).AddTicks(5029),
                             DataInicio = new DateTime(2023, 7, 12, 14, 25, 20, 435, DateTimeKind.Local).AddTicks(8516),
                             DispositivoFK = 3,
                             FuncionariosFK = 5,
@@ -939,58 +753,8 @@ namespace DevWeb_Trab_Final.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "a1",
+                            UserId = "1",
                             RoleId = "a"
-                        },
-                        new
-                        {
-                            UserId = "a2",
-                            RoleId = "a"
-                        },
-                        new
-                        {
-                            UserId = "f1",
-                            RoleId = "f"
-                        },
-                        new
-                        {
-                            UserId = "f2",
-                            RoleId = "f"
-                        },
-                        new
-                        {
-                            UserId = "f3",
-                            RoleId = "f"
-                        },
-                        new
-                        {
-                            UserId = "f4",
-                            RoleId = "f"
-                        },
-                        new
-                        {
-                            UserId = "f5",
-                            RoleId = "f"
-                        },
-                        new
-                        {
-                            UserId = "c1",
-                            RoleId = "c"
-                        },
-                        new
-                        {
-                            UserId = "c2",
-                            RoleId = "c"
-                        },
-                        new
-                        {
-                            UserId = "c3",
-                            RoleId = "c"
-                        },
-                        new
-                        {
-                            UserId = "c4",
-                            RoleId = "c"
                         });
                 });
 

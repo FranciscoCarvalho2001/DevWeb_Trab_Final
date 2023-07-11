@@ -189,6 +189,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
+                //faz o redirecionamento para a view administrador
                 return RedirectToAction("Administrador", "Funcionarios");
             }
             ViewData["ClienteFK"] = new SelectList(_context.Clientes, "Id", "Email", dispositivos.ClienteFK);
@@ -230,6 +231,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
+            //faz o redirecionamento para a view administrador
             return RedirectToAction("Administrador", "Funcionarios");
         }
 

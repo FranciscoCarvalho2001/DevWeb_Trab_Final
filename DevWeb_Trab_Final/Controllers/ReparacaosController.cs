@@ -61,13 +61,17 @@ namespace DevWeb_Trab_Final.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DataInicio,DataFim,Custo,CustoAux,Observacao,DispositivoFK,FuncionariosFK")] Reparacao reparacao)
         {
+            // atribuir os dados do CustoAux ao Custo
+            // se não for nulo
             if (!string.IsNullOrEmpty(reparacao.CustoAux)) {
                 reparacao.Custo = Convert.ToDecimal(reparacao.CustoAux.Replace('.', ','));
             }
+
             if (ModelState.IsValid)
             {
                 _context.Add(reparacao);
                 await _context.SaveChangesAsync();
+                //faz o redirecionamento para a view administrador
                 return RedirectToAction("Administrador", "Funcionarios");
             }
 
@@ -80,9 +84,11 @@ namespace DevWeb_Trab_Final.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             var reparacao = await _context.Reparacao.FindAsync(id);
+
+            // atribuir os dados do Custo ao CustoAux
+            reparacao.CustoAux = Convert.ToString(reparacao.Custo);
             
-                reparacao.CustoAux = Convert.ToString(reparacao.Custo);
-            
+
             if (id == null || _context.Reparacao == null)
             {
                 return NotFound();
@@ -108,10 +114,14 @@ namespace DevWeb_Trab_Final.Controllers
             {
                 return NotFound();
             }
+
+            // atribuir os dados do CustoAux ao Custo
+            // se não for nulo
             if (!string.IsNullOrEmpty(reparacao.CustoAux))
             {
                 reparacao.Custo = Convert.ToDecimal(reparacao.CustoAux.Replace('.', ','));
             }
+            
             if (ModelState.IsValid)
             {
                 try
@@ -130,6 +140,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
+                //faz o redirecionamento para a view administrador
                 return RedirectToAction("Administrador", "Funcionarios");
 
             }
@@ -174,6 +185,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
+            //faz o redirecionamento para a view administrador
             return RedirectToAction("Administrador", "Funcionarios");
         }
 

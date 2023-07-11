@@ -15,9 +15,10 @@ namespace DevWeb_Trab_Final.Controllers
             _logger = logger;
             _dbContext = dbContext;
         }
-
+        
         public IActionResult Index()
         {
+            // Obtem os dados dos funcionários
             var funcionarios = _dbContext.Funcionarios.ToList(); 
 
             return View("Index",funcionarios);
