@@ -17,7 +17,7 @@ namespace DevWeb_Trab_Final.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Tipo de dispositivo
+        /// Tipo de dispositivo 
         /// </summary>
         [Required(ErrorMessage = "A {0} é de preenchimento obrigatório")]
         [RegularExpression("[A-Za-z]{1,25}-[A-Za-z]{1,50}", ErrorMessage = "O {0} tem de ser da forma Dispostivo-NomeCliente")]

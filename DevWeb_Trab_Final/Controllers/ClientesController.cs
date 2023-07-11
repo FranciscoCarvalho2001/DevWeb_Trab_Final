@@ -113,6 +113,7 @@ namespace DevWeb_Trab_Final.Controllers
                         throw;
                     }
                 }
+                //faz o redirecionamento para a view administrador
                 return RedirectToAction("Administrador", "Funcionarios");
             }
             return View(clientes);
@@ -152,6 +153,7 @@ namespace DevWeb_Trab_Final.Controllers
             }
             
             await _context.SaveChangesAsync();
+            //faz o redirecionamento para a view administrador
             return RedirectToAction("Administrador", "Funcionarios");
         }
 

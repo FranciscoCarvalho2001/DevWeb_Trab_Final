@@ -42,7 +42,7 @@
     </dl>
 
     <h4>Fotografias do @Model.Modelo de @Model.Cliente.Nome</h4>
-
+    @*Mostra todas as fotas do dispositivo presente na lista de fotografias*@
     @foreach (var foto in Model.ListaFotografias) {
         <p>
             <img src="~/imagens/@foto.NomeFoto"
